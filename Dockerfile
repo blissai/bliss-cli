@@ -10,7 +10,9 @@ RUN yum install -y git wget
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash -
 RUN yum install -y nodejs --enablerepo=epel
-RUN yum -y install gcc-c++ make
+RUN yum install -y gcc-c++ make
+RUN yum install -y perl
+RUN yum install -y python-pip
 
 # Install JSHint and CSSLint
 RUN npm install -g jshint
@@ -32,7 +34,7 @@ RUN git clone https://github.com/WordPress-Coding-Standards/WordPress-Coding-Sta
 RUN ~/phpcs/scripts/phpcs --config-set installed_paths ~/wpcs
 
 # Install Perl Critic
-RUN perl -MCPAN -e 'install Perl::Critic'
+RUN yum install -y 'perl(Perl::Critic)'
 
 # Install pip modules
 RUN pip install importlib argparse lizard django prospector
@@ -47,15 +49,13 @@ RUN gem update --system
 RUN gem install bundler
 
 # Install Ruby Gems
-RUN gem install metric_fu
 RUN gem install rails_best_practices
 RUN gem install rubocop
 RUN gem install rubocop-rspec
 RUN gem install brakeman
 
-# Clone collector
-RUN git clone https://github.com/founderbliss/collector.git collector
-RUN cd collector && bundle install
+# Get cloc from collector repo
+RUN curl https://raw.githubusercontent.com/founderbliss/collector/master/bin/cloc -o ~/cloc
 
 # Define working directory.
 WORKDIR /data
