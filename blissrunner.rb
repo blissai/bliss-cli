@@ -10,23 +10,16 @@ class BlissRunner
     @beta = beta
     FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
     if auto
-      configure_aws(@config['AWS_ACCESS_KEY_ID'], @config['AWS_SECRET_ACCESS_KEY'])
+      configure_aws
     else
       get_config
     end
-    DependencyInstaller.new(@config['TOP_LVL_DIR']).run
   end
 
   # Global AWS Configuration
-  def configure_aws(key, secret)
+  def configure_aws
     puts 'Configuring AWS...'.blue
-    # If Windows, use AWS's bundled ssl cert
-    Aws.use_bundled_cert! if Gem.win_platform?
-    # do this once, and all s3 clients will now accept `:requester_pays` to all operations
-    Aws::S3::Client.add_plugin(RequesterPays)
-    aws_credentials = Aws::Credentials.new(key, secret)
-    # Aws.config.update(region: 'us-east-1', credentials: aws_credentials)
-    $aws_client = Aws::S3::Client.new(region: 'us-east-1', credentials: aws_credentials)
+    $aws_client = Aws::S3::Client.new(region: 'us-east-1')
     puts 'AWS configured.'.green
   end
 
@@ -35,18 +28,14 @@ class BlissRunner
     puts 'Configuring collector...'
     get_or_save_arg('What\'s your Bliss API Key?', 'API_KEY')
     get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
-    get_or_save_arg('What\'s your AWS Access Key?', 'AWS_ACCESS_KEY_ID')
-    get_or_save_arg('What\'s your AWS Access Secret?', 'AWS_SECRET_ACCESS_KEY')
-    # get_or_save_arg('What is the hostname of your Bliss instance?', 'BLISS_HOST')
     get_or_save_arg('What is the name of your organization in git?', 'ORG_NAME')
     set_host
     File.open("#{File.expand_path('~')}/bliss-config.yml", 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green
-    configure_aws(@config['AWS_ACCESS_KEY_ID'], @config['AWS_SECRET_ACCESS_KEY'])
+    configure_aws
   end
 
   def choose_command
-    # binding.pry
     ctasks = ConcurrentTasks.new(@config)
     puts 'Which command would you like to run? ((C)ollector, (S)tats, (L)inter or (Q)uit).'
     command = gets.chomp.upcase
@@ -59,8 +48,6 @@ class BlissRunner
     elsif command == 'S'
       puts 'Running Stats'
       ctasks.stats
-    # elsif command == 'T'
-    #   schedule_job
     else
       puts 'Not a valid option. Please choose Collector, Lint, Stats or Quit.' unless command == 'Q'
     end
@@ -124,26 +111,6 @@ class BlissRunner
     # schedule task with schtasks
     cmd = "schtasks /Create #{freq} /TN BlissCollector /TR #{file_name}"
     `#{cmd}`
-  end
-
-  def cron_job(option)
-    # Create a shell script that runs blissauto
-    cwd = `pwd`.gsub(/\n/, '')
-    cron_command = "cd  #{cwd}; ruby blisscollector.rb --auto"
-    file_name = "#{cwd}/blisstask.sh"
-    File.open(file_name, 'w') { |file| file.write(cron_command) }
-    # Format cron entry
-    if option == 1
-      cron_entry = "@daily #{file_name}"
-    elsif option == 2
-      cron_entry = "@hourly #{file_name}"
-    else
-      cron_entry = "*/10 * * * * #{file_name}"
-    end
-
-    # Create a file for Cron
-    File.open('/etc/cron.d/bliss', 'w') { |file| file.write(cron_entry) }
-    puts 'Job scheduled successfully.'.green
   end
 
   def set_host

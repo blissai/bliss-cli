@@ -53,9 +53,10 @@ RUN gem install rails_best_practices
 RUN gem install rubocop
 RUN gem install rubocop-rspec
 RUN gem install brakeman
+RUN gem install simplecov
 
-# Get cloc from collector repo
-RUN curl https://raw.githubusercontent.com/founderbliss/collector/master/bin/cloc -o ~/cloc
+# Get collector tasks
+RUN git clone https://github.com/founderbliss/collector-tasks.git ~/collector
 
 # Define working directory.
 WORKDIR /data

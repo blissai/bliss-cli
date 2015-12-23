@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 puts 'Initializing...'
-$LOAD_PATH << 'lib'
-require_relative 'lib/bootstrap'
 include CliTasks
 @args = ARGV
 
@@ -11,10 +9,6 @@ if auto?
 elsif beta?
   puts 'Running scheduled Bliss job in beta...'
   BlissRunner.new(false, true)
-elsif scheduler?
-  cwd = `$pwd.Path`.gsub(/\n/, '')
-  puts `@powershell schtasks /Create /SC HOURLY /MO 3 /TN BlissCollector /TR "Powershell.exe -ExecutionPolicy ByPass -Command 'jruby #{cwd}/blisscollector.rb auto'"`
-  puts 'Task Scheduled to run every 3 hours.'.green
 elsif loop?
   # The main program loop to accept commands for various tasks
   def program_loop
