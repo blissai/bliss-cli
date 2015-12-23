@@ -17,8 +17,7 @@ class DockerRunner
     @env_vars.each do |k, v|
       cmd += " -e \"#{k}=#{v}\""
     end
-    cmd += "--rm #{@command}"
-    cmd
+    "#{cmd} --rm #{@command}"
   end
 
   def build_image
