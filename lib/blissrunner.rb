@@ -41,6 +41,7 @@ class BlissRunner
     command = gets.chomp.upcase
     if command == 'C'
       puts 'Running Collector'
+      `docker run -i -t `
       CollectorTask.new(@config['TOP_LVL_DIR'], @config['ORG_NAME'], @config['API_KEY'], @config['BLISS_HOST']).execute
     elsif command == 'L'
       puts 'Running Linter'
@@ -72,22 +73,6 @@ class BlissRunner
 
   def configured?
     !@config['TOP_LVL_DIR'].empty? && !@config['ORG_NAME'].empty? && !@config['API_KEY'].empty? && !@config['BLISS_HOST'].empty?
-  end
-
-  # A function to set up a scheduled job to run 'automate' every x number of minutes
-  def schedule_job
-    puts 'How often would you like to automatically run Bliss Collector?'.blue
-    puts " (1) Every Day\n (2) Every Hour\n (3) Every 10 Minutes"
-    option = gets.chomp
-    if ![1, 2, 3].include? option.to_i
-      puts 'This is not a valid option. Please choose 1, 2, or 3.'
-    else
-      if Gem.win_platform?
-        task_sched(option)
-      else
-        cron_job(option)
-      end
-    end
   end
 
   def task_sched(option)

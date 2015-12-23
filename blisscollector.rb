@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+$LOAD_PATH << 'lib'
+require_relative 'lib/bootstrap'
 puts 'Initializing...'
 include CliTasks
 @args = ARGV
