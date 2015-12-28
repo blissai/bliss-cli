@@ -9,18 +9,9 @@ class BlissRunner
     end
     @beta = beta
     FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
-    if auto
-      configure_aws
-    else
-      get_config
-    end
-  end
-
-  # Global AWS Configuration
-  def configure_aws
-    puts 'Configuring AWS...'.blue
-    $aws_client = Aws::S3::Client.new(region: 'us-east-1')
-    puts 'AWS configured.'.green
+    get_config unless auto
+    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
+                                      'collector')
   end
 
   # Initialize state from config file or user input
@@ -32,7 +23,6 @@ class BlissRunner
     set_host
     File.open("#{File.expand_path('~')}/bliss-config.yml", 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green
-    configure_aws
   end
 
   def choose_command
@@ -41,14 +31,13 @@ class BlissRunner
     command = gets.chomp.upcase
     if command == 'C'
       puts 'Running Collector'
-      `docker run -i -t `
-      CollectorTask.new(@config['TOP_LVL_DIR'], @config['ORG_NAME'], @config['API_KEY'], @config['BLISS_HOST']).execute
+      @docker_runner.run('collector')
     elsif command == 'L'
       puts 'Running Linter'
-      ctasks.linter
+      @docker_runner.run('linter')
     elsif command == 'S'
       puts 'Running Stats'
-      ctasks.stats
+      @docker_runner.run('stats')
     else
       puts 'Not a valid option. Please choose Collector, Lint, Stats or Quit.' unless command == 'Q'
     end

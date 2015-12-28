@@ -5,6 +5,11 @@ puts 'Initializing...'
 include CliTasks
 @args = ARGV
 
+if `docker images`.include? 'Cannot connect to the Docker daemon.'
+  puts 'Docker is not running. Please start docker.'
+  exit
+end
+
 if auto?
   puts 'Running scheduled Bliss job...'
   BlissRunner.new(true).automate

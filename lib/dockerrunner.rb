@@ -1,23 +1,23 @@
 # Class to encapsulate docker commands
 class DockerRunner
-  def initialize(env_vars, repos_dir, image_name, command)
+  def initialize(env_vars, repos_dir, image_name)
     @env_vars = env_vars
+    @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = repos_dir
     @image_name = image_name
-    @command = command
     build_image unless image_exists?
   end
 
-  def run
-    `#{docker_start_cmd}`
+  def run(command)
+    `#{docker_start_cmd(command)}`
   end
 
-  def docker_start_cmd
-    cmd = "-t #{@image_name} -v #{@repos_dir}:/repositories"
+  def docker_start_cmd(command)
+    cmd = "docker run -i -t #{@image_name} -v #{@repos_dir}:/repositories"
     @env_vars.each do |k, v|
       cmd += " -e \"#{k}=#{v}\""
     end
-    "#{cmd} --rm #{@command}"
+    "#{cmd} --rm ruby ~/collector/blisscollector.rb #{command}"
   end
 
   def build_image
