@@ -30,7 +30,7 @@ class DockerRunner
     `docker images`.include? @image_name
   end
 
-  def self.remove_stopped
-    `docker rm $(docker ps -a -q)`
+  def remove_stopped
+    puts `docker rm $(docker ps -a -q)`
   end
 end
