@@ -32,6 +32,6 @@ class DockerRunner
 
   def remove_stopped
     stopped_containers = `docker ps -a -q`
-    puts `docker rm #{stopped_containers}` unless stopped_containers.blank?
+    puts `docker rm #{stopped_containers}` unless stopped_containers.empty?
   end
 end
