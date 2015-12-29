@@ -18,7 +18,9 @@ class DockerRunner
     @env_vars.each do |k, v|
       cmd += " -e \"#{k}=#{v}\""
     end
-    "#{cmd} --rm -t #{@image_name} 'cd /root/collector && bundle install && jruby /root/collector/blisscollector.rb #{command}'"
+    git_cmds = 'cd /root/collector && git pull origin master && bundle install'
+    collector_cmds = "jruby blisscollector.rb #{command}"
+    "#{cmd} --rm -t #{@image_name} #{git_cmds} && #{collector_cmds}"
   end
 
   def build_image
