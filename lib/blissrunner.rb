@@ -26,7 +26,6 @@ class BlissRunner
   end
 
   def choose_command
-    ctasks = ConcurrentTasks.new(@config)
     puts 'Which command would you like to run? ((C)ollector, (S)tats, (L)inter or (Q)uit).'
     command = gets.chomp.upcase
     if command == 'C'
@@ -47,14 +46,13 @@ class BlissRunner
   # A function that automates the above three functions for a scheduled job
   def automate
     if configured?
-      CollectorTask.new(@config['TOP_LVL_DIR'], @config['ORG_NAME'], @config['API_KEY'], @config['BLISS_HOST']).execute
+      @docker_runner.run('collector')
       # Sleep to wait for workers to finish
       sleep(60)
-      ctasks = ConcurrentTasks.new(@config)
-      ctasks.stats
+      @docker_runner.run('linter')
       # Sleep to wait for workers to finish
       sleep(60)
-      ctasks.linter
+      @docker_runner.run('stats')
     else
       puts 'Collector has not been configured. Cannot run auto-task.'.red
     end
