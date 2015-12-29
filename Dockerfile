@@ -48,11 +48,11 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 RUN gem update --system
 RUN gem install bundler
 
+# Get collector tasks
+RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector
+
 # Define working directory.
 WORKDIR /root
 
 # Define default command.
 CMD ["/bin/bash"]
-
-# Get collector tasks
-RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector && cd /root/collector && bundle install
