@@ -57,7 +57,7 @@ RUN gem install simplecov
 
 # Get collector tasks
 RUN git clone https://github.com/founderbliss/collector-tasks.git ~/collector
-RUN cd ~/collector && git pull origin master
+RUN cd ~/collector && git pull origin master && bundle install
 
 # Define working directory.
 WORKDIR /data
