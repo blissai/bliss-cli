@@ -13,11 +13,11 @@ class DockerRunner
   end
 
   def docker_start_cmd(command)
-    cmd = "docker run -i -t #{@image_name} -v #{@repos_dir}:/repositories"
+    cmd = "docker -v #{@repos_dir}:/repositories"
     @env_vars.each do |k, v|
       cmd += " -e \"#{k}=#{v}\""
     end
-    "#{cmd} --rm ruby ~/collector/blisscollector.rb #{command}"
+    "#{cmd} --rm run -i -t #{@image_name} ruby ~/collector/blisscollector.rb #{command}"
   end
 
   def build_image
