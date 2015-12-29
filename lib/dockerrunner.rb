@@ -16,7 +16,7 @@ class DockerRunner
   def docker_start_cmd(command)
     docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
     @env_vars.each do |k, v|
-      cmd += " -e \"#{k}=#{v}\""
+      docker_cmd += " -e \"#{k}=#{v}\""
     end
     collector_cmds = "jruby /root/collector/blisscollector.rb #{command}"
     "#{docker_cmd} --rm -t #{@image_name} #{collector_cmds}"
