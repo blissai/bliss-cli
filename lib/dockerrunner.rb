@@ -14,13 +14,12 @@ class DockerRunner
   end
 
   def docker_start_cmd(command)
-    cmd = "docker run -i -v #{@repos_dir}:/repositories"
+    docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
     @env_vars.each do |k, v|
       cmd += " -e \"#{k}=#{v}\""
     end
-    git_cmds = 'cd /root/collector && git pull origin master && bundle install'
-    collector_cmds = "jruby blisscollector.rb #{command}"
-    "#{cmd} --rm -t #{@image_name} #{git_cmds} && #{collector_cmds}"
+    collector_cmds = "jruby /root/collector/blisscollector.rb #{command}"
+    "#{docker_cmd} --rm -t #{@image_name} #{collector_cmds}"
   end
 
   def build_image
