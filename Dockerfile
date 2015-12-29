@@ -48,13 +48,6 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 RUN gem update --system
 RUN gem install bundler
 
-# Install Ruby Gems
-RUN gem install rails_best_practices
-RUN gem install rubocop
-RUN gem install rubocop-rspec
-RUN gem install brakeman
-RUN gem install simplecov
-
 # Get collector tasks
 RUN git clone https://github.com/founderbliss/collector-tasks.git ~/collector
 RUN cd ~/collector && git pull origin master && bundle install
