@@ -1,7 +1,5 @@
 # General purpose loader for require_relatived libraries
 require 'rubygems'
-require 'bundler/setup'
-require 'active_support/all'
 require 'mechanize'
 require 'aws-sdk'
 require 'pry'
