@@ -49,8 +49,7 @@ RUN gem update --system
 RUN gem install bundler
 
 # Get collector tasks
-RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector
-RUN cd /root/collector && git pull origin master && bundle install
+RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector && cd /root/collector && && bundle install
 
 # Define working directory.
 WORKDIR /root
