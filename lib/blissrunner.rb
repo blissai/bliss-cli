@@ -121,6 +121,7 @@ class BlissRunner
     else
       puts message.blue
       arg = gets.chomp
+      arg = File.expand_path(arg) if env_name.eql? 'TOP_LVL_DIR'
       valid = is_valid_arg(env_name, arg)
       if !valid[:valid]
         get_or_save_arg(valid[:msg], env_name)
