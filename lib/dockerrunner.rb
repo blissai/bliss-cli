@@ -9,7 +9,8 @@ class DockerRunner
   end
 
   def run(command)
-    `#{docker_start_cmd(command)}`
+    puts `#{docker_start_cmd(command)}`
+    remove_stopped
   end
 
   def docker_start_cmd(command)
@@ -21,7 +22,8 @@ class DockerRunner
   end
 
   def build_image
-    `docker build -t #{@image_name} .`
+    puts "Building docker image..."
+    puts `docker build -t #{@image_name} .`
   end
 
   def image_exists?
