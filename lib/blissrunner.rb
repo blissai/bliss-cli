@@ -11,9 +11,9 @@ class BlissRunner
     @beta = beta
     FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
     get_config unless auto
-    update_repositories
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'collector')
+    update_repositories
   end
 
   # Initialize state from config file or user input

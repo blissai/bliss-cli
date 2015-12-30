@@ -18,6 +18,10 @@ RUN yum install -y python-pip
 RUN npm install -g jshint
 RUN npm install -g csslint
 
+# Clone jshint-json to root/vendor
+RUN cd /root && mkdir vendor
+RUN cd /root/vendor && git clone https://github.com/sindresorhus/jshint-json.git jshint-json
+
 # Install Java
 RUN yum install -y java-1.7.0-openjdk-devel
 RUN yum install -y java-1.7.0-openjdk
