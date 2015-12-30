@@ -1,5 +1,6 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
+  include Gitbase
   def initialize(auto = false, beta = false)
     # Load configuration File if it exists
     if File.exist? "#{File.expand_path('~/bliss-config.yml')}"
@@ -10,6 +11,7 @@ class BlissRunner
     @beta = beta
     FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
     get_config unless auto
+    update_repositories
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'collector')
   end
@@ -126,6 +128,18 @@ class BlissRunner
       else
         @config[env_name] = arg
       end
+    end
+  end
+
+  def update_repositories
+    puts 'Updating repositories to lastest...'
+    repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
+            .select { |fn| File.directory? fn }
+    repos.each do |dir|
+      cmd = "cd #{dir} && git pull"
+      puts "\tPulling repository at #{dir}...".blue
+      checkout_commit(dir_name, 'master')
+      `#{cmd}`
     end
   end
 end
