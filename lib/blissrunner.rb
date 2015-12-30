@@ -12,7 +12,7 @@ class BlissRunner
     FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
     get_config unless auto
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
-                                      'collector')
+                                      'blissai/collector')
     update_repositories
   end
 
