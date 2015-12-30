@@ -138,7 +138,7 @@ class BlissRunner
     repos.each do |dir|
       cmd = "cd #{dir} && git pull"
       puts "\tPulling repository at #{dir}...".blue
-      checkout_commit(dir_name, 'master')
+      checkout_commit(dir, 'master')
       `#{cmd}`
     end
   end
