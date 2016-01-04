@@ -11,12 +11,12 @@ if [ "$(uname)" = "Darwin" ]; then
 elif [ "$(uname)" = "Linux" ]; then
   printf "Installing ruby dependencies...\n"
   if [ -n "$(command -v yum)" ]; then
-    sudo yum -y install gcc g++ gcc-c++ make automake autoconf ruby-devel kernel-devel
+    sudo yum -y install gcc gcc-c++ make automake autoconf ruby-devel kernel-devel
   elif [ -n "$(command -v apt-get)" ]; then
     sudo apt-get -y install gcc g++ make automake autoconf ruby-devel build-essential libstdc++6
   fi
   gem install bundler
-  bundle install
+  bundle install --without test
   if [ -n "$(command -v docker)" ]; then
     printf "Docker not detected. Installing Docker...\n"
     curl -sSL https://get.docker.com/ | sh;
