@@ -5,7 +5,6 @@ class DockerRunner
     @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = repos_dir
     @image_name = image_name
-    # build_image
     pull_image
   end
 
@@ -24,12 +23,12 @@ class DockerRunner
   end
 
   def build_image
-    puts "Building docker image..."
+    puts 'Building docker image...'
     puts `docker build -t #{@image_name} .`
   end
 
   def pull_image
-    puts "Pulling docker image..."
+    puts 'Pulling docker image...'
     puts `docker pull #{@image_name}`
   end
 

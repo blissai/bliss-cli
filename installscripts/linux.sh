@@ -1,14 +1,12 @@
 ##!/bin/bash
-set_package_manager(){
-  if [[ -n "$(command -v yum)" ]]
-  then
-    PACKAGEMGR="sudo yum"
-  elif [[ -n "$(command -v apt-get)" ]]
-  then
-    PACKAGEMGR="sudo yum"
+if [ "-n $(command -v docker)" ]; then
+  if [ "$(uname)" == "Darwin" ]; then
+    printf "Please install Docker, which can be located at:\nhttps://www.docker.com/docker-toolbox";
+    printf "Make sure to include Docker Machine.";
+  elif [ "$(uname)" == "Linux" ]; then
+    printf "Installing docker...";
+    curl -sSL https://get.docker.com/ | sh;
+    docker pull blissai/collector;
+    printf "Installation complete.";
   fi
-}
-set_package_manager()
-echo "Installing docker..."
-curl -sSL https://get.docker.com/ | sh
-echo "Installation complete. Please reboot your system."
+fi
