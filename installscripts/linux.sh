@@ -6,7 +6,7 @@ if [ "$(uname)" = "Darwin" ]; then
 elif [ "$(uname)" = "Linux" ]; then
   printf "Installing ruby dependencies...\n"
   if [ -n "$(command -v yum)" ]; then
-    sudo yum -y install gcc g++ make automake autoconf ruby-devel libxml2 libxml2-devel libxslt libxslt-devel
+    sudo yum -y install gcc g++ make automake autoconf ruby-devel libxml2 libxml2-devel libxslt libxslt-devel kernel-devel
   elif [ -n "$(command -v apt-get)" ]; then
     sudo apt-get -y install gcc g++ make automake autoconf ruby-devel build-essential libstdc++6
   fi
