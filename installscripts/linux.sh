@@ -5,6 +5,9 @@ if [ "-n $(command -v docker)" ]; then
     printf "Make sure to include Docker Machine.\n";
   elif [ "$(uname)" = "Linux" ]; then
     curl -sSL https://get.docker.com/ | sh;
+    printf "Starting docker service..."
+    sudo service docker start;
+    printf "Pulling Bliss Engine..."
     docker pull blissai/collector;
     printf "Installation complete.\n";
   fi
