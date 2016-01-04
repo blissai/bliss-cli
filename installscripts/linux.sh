@@ -5,12 +5,7 @@ if [ "-n $(command -v docker)" ]; then
     printf "Make sure to include Docker Machine.\n";
   elif [ "$(uname)" = "Linux" ]; then
     curl -sSL https://get.docker.com/ | sh;
-    printf "Starting docker service..."
-    sudo service docker start;
-    printf "Pulling Bliss Engine..."
-    docker pull blissai/collector;
-    printf "Stopping docker service..."
-    sudo service docker stop;
-    printf "Installation complete.\n";
+    sudo usermod -aG docker ec2-user
+    printf "Docker installation complete. Please reboot your system.\n";
   fi
 fi
