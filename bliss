@@ -11,12 +11,12 @@ We require a local Docker daemon to be running before using Bliss Collector.
 
 See https://github.com/founderbliss/docker for more details.
 
-If using Unix, you should be able to use:
+If using Unix, you should use:
 sudo service docker start
 
-Docker Machine users should use:
+Docker Machine (OSX and Windows) users should use:
 docker-machine start default
-eval "$(docker-machine env default)"
+eval "\$(docker-machine env default)"
 
 EOF
   exit 1
