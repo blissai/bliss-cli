@@ -9,10 +9,27 @@ Your Docker setup does not support the Bliss Wrapper script:
 
 We require a local Docker daemon to be running before using Bliss Collector.
 
-See https://github.com/codeclimate/codeclimate for more details.
+See https://github.com/founderbliss/docker for more details.
+
+If using Unix, you should be able to use:
+sudo service docker start
+
+Docker Machine users should use:
+docker-machine start default
+eval "$(docker-machine env default)"
 
 EOF
   exit 1
+}
+
+start_docker_osx() {
+  $host = $(uname)
+  if [ $host = 'Darwin' ]; then
+    if command -v docker-machine > /dev/null 2>&1; then
+      docker-machine start default
+      eval "$(docker-machine env default)"
+    fi
+  fi
 }
 
 socket_missing() {
@@ -21,7 +38,6 @@ socket_missing() {
 
 invalid_docker_host() {
   local host=$1
-
   invalid_setup "invalid DOCKER_HOST=$host, must be unset or unix:///var/run/docker.sock"
 }
 
