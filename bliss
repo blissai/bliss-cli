@@ -62,5 +62,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  echo "Docker is setup correctly."
+  ruby blisscollector.rb
 fi
