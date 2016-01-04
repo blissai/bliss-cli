@@ -3,7 +3,7 @@ invalid_setup() {
   local reason=$1
 
   cat >&2 <<EOF
-Your Docker setup does not support the Bliss Wrapper script:
+Docker is not running:
 
   > $reason
 
