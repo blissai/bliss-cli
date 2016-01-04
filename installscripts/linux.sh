@@ -9,6 +9,8 @@ if [ "-n $(command -v docker)" ]; then
     sudo service docker start;
     printf "Pulling Bliss Engine..."
     docker pull blissai/collector;
+    printf "Stopping docker service..."
+    sudo service docker stop;
     printf "Installation complete.\n";
   fi
 fi
