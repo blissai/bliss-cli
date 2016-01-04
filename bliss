@@ -62,7 +62,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  gem install bundler
-  bundle install --silent
   ruby blisscollector.rb
 fi
