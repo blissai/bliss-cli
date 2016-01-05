@@ -64,5 +64,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  ruby lib/blisscollector.rb
+  cd -P .. && ruby blisscollector.rb
 fi
