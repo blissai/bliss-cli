@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.join(__FILE__, '../lib'))
 
 Gem::Specification.new do |s|
-  s.name        = 'codeclimate'
+  s.name        = 'bliss'
   s.version     = '1.0.0'
   s.summary     = 'Bliss Enterprise'
   s.license     = 'MIT'
