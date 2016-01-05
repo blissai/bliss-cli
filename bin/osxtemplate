@@ -3,11 +3,11 @@ invalid_setup() {
   local reason=$1
 
   cat >&2 <<EOF
-Docker is not running:
+Docker is not running or is not accessible by this shell:
 
   > $reason
 
-We require a local Docker daemon to be running before using Bliss Collector.
+We require a local Docker daemon to be running and accessible to your shell before using Bliss Collector.
 
 See https://github.com/founderbliss/docker for more details.
 
@@ -41,7 +41,22 @@ invalid_docker_host() {
   invalid_setup "invalid DOCKER_HOST=$host, must be unset or unix:///var/run/docker.sock"
 }
 
-echo "OK $(pwd)"
+function abspath() {
+    # generate absolute path from relative path
+    # $1     : relative filename
+    # return : absolute path
+    if [ -d "$1" ]; then
+        # dir
+        (cd "$1"; pwd)
+    elif [ -f "$1" ]; then
+        # file
+        if [[ $1 == */* ]]; then
+            echo "$(cd "${1%/*}"; pwd)/${1##*/}"
+        else
+            echo "$(pwd)/$1"
+        fi
+    fi
+}
 
 if command -v docker-machine > /dev/null 2>&1; then
   docker-machine ssh $DOCKER_MACHINE_NAME -- \
@@ -64,5 +79,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  cd -P .. && ruby blisscollector.rb
+  $EXECUTE_COMMAND
 fi
