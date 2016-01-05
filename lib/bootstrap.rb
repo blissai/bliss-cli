@@ -1,8 +1,5 @@
 # General purpose loader for require_relatived libraries
 require 'rubygems'
-require 'mechanize'
-require 'aws-sdk'
-require 'pry'
 require 'open3'
 require 'yaml'
 require 'colorize'

@@ -1,11 +1,6 @@
 source 'https://rubygems.org'
-gem 'mechanize'
-gem 'cached_web'
-gem 'aws-sdk'
-gem 'io-console'
-gem 'colorize', '~> 0.7.7'
-gem 'whenever'
-gem 'rspec'
+
+gemspec
 
 group :test do
   gem 'rspec'
