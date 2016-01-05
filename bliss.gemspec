@@ -14,8 +14,4 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.bindir        = 'bin'
   s.executables   = %w(bliss)
-
-  s.add_dependency 'colorize'
-  s.add_dependency 'whenever'
-  s.add_dependency 'io-console'
 end
