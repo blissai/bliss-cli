@@ -41,7 +41,7 @@ invalid_docker_host() {
   invalid_setup "invalid DOCKER_HOST=$host, must be unset or unix:///var/run/docker.sock"
 }
 
-function abspath() {
+abspath() {
     # generate absolute path from relative path
     # $1     : relative filename
     # return : absolute path

@@ -3,13 +3,12 @@ class BlissRunner
   include Gitbase
   def initialize(auto = false)
     # Load configuration File if it exists
-    if File.exist? "#{File.expand_path('~/bliss-config.yml')}"
-      @config = YAML.load_file("#{File.expand_path('~/bliss-config.yml')}")
+    if File.exist? "#{File.expand_path('~/.bliss/bliss-config.yml')}"
+      @config = YAML.load_file("#{File.expand_path('~/.bliss/bliss-config.yml')}")
     else
       @config = {}
     end
     @beta = beta
-    FileUtils.mkdir_p "#{File.expand_path('~/collector/logs')}"
     get_config unless auto
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
@@ -23,7 +22,7 @@ class BlissRunner
     get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
     get_or_save_arg('What is the name of your organization in git?', 'ORG_NAME')
     set_host
-    File.open("#{File.expand_path('~')}/bliss-config.yml", 'w') { |f| f.write @config.to_yaml } # Store
+    File.open("#{File.expand_path('~/.bliss/bliss-config.yml')}", 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green
   end
 
