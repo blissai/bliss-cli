@@ -62,5 +62,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  ruby blisscollector.rb
+  ruby ../blisscollector.rb
 fi
