@@ -132,7 +132,7 @@ class BlissRunner
   end
 
   def update_repositories
-    puts 'Updating repositories to lastest...'
+    puts 'Updating repositories to latest commit...'
     repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
             .select { |fn| File.directory? fn }
     repos.each do |dir|

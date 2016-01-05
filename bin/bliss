@@ -62,5 +62,6 @@ else
 fi
 
 if [ -t 1 ]; then
-  ruby ../blisscollector.rb
+  echo "OK $pwd"
+  # ruby ../blisscollector.rb
 fi
