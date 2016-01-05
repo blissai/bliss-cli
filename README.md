@@ -7,12 +7,16 @@ Information Required
 You will need the following information before using Bliss's Collector:
 *  Your Bliss API Key - You can find this by logging into bliss.ai, clicking on the Settings wheel, scrolling the the bottom and clicking "Show" on the API Key bar
 *  The path of the directory where all of your repositories are located
-*  Your AWS Key and AWS Secret - These are used to upload linting files to our AWS Buckets
 *  Your git organization name
 
-To Clone This Repository
+Dependencies
 --------
-Make sure you have Git installed on your machine.
+Our CLI tool uses Docker to run our analysis in a controlled environment and Git to track your repostories' histories. As such, in order to use this tool, you will need to have Docker and Git installed.
+
+#### Git ####
+The following is a list of dependencies that are required to support:
+*  Git installation
+*  Docker
 
 For Ubuntu/Debian machines, execute the following in terminal:
 `````````
@@ -24,87 +28,31 @@ For RPM-based systems such as Yum, execute the following in terminal:
 sudo yum install -y git
 `````````
 
-For Windows machines, you will need to download and run the installer at:
-https://git-scm.com/download/win
+For other Operating Systems, you can download Git from:
+https://git-scm.com/download
 
-You can then clone the repository by executing the following in your terminal:
-```````````
-git clone https://github.com/founderbliss/collector.git
-```````````
+#### Docker - Windows or OSX ####
+We recommend installing Docker by installing Docker Toolbox, which is located at:
+https://www.docker.com/docker-toolbox
 
-Dependencies
---------
-Bliss's Collector has specific requirements that need to be met before it will work on all project types.
-We attempt to install these for you with the installscripts as outlined below, however additional steps
-may be required depending on your specific environment and it's compatibility with our scripts.
+This package has contains everything needed to run Docker on Windows or OSX.
 
-The following is a list of dependencies that are required to support:
-*  JRuby 9.0.3.0
-*  Ruby DevKit
-*  Perl
-*  Python
-*  NodeJS and Node Package Manager
-*  php
-*  Git installation
+#### Docker - Linux, CentOS etc ####
+To install Docker on Unix Operating Systems, follow the official Docker documentation for your Unix flavor at:
+https://docs.docker.com/engine/installation/
 
-In addition, a number of linting tools are required:
-*  JSHint (for JavaScript repositories)
-*  Prospector (for Python/Django repositories)
-*  ReSharper and InspectCode (for .NET repositories)
-*  pmd (for Java repositories)
-*  cpd - included with pmd (for all repositories)
-*  lizard (for Objective-C repositories)
-*  metric_fu (for ruby repositories)
-*  PHP Codesniffer (for php repositories)
-*  Wordpress Codesniffer (for Wordpress repositories)
-*  csslint (for css file linting)
-
-For those with .NET repositories, you will need to manually install InspectCode, which is a code inspection tool for .NET projects. You download it here:
-
-  https://www.jetbrains.com/resharper/features/command-line.html
-
-Getting Started With Unix (CentOS/Ubuntu)
---------
-There is a shell script in the 'installscripts' that will handle the installation of dependencies.
-To run this script, open up a terminal window, navigate (cd) into the 'installscripts' directory, and type
-`````
-sh linux.sh
-`````
-
-You will need to reboot your system after running this script.
-
-After running this script and rebooting, you will need to navigate (cd) into the Collector directory and type:
-```````````
-gem install bundler
-bundle install
-```````````
-
-Getting Started With Windows
---------
-
-There is a script called setup.ps1 in the 'installscripts' folder that will manage the installation of Java, JRuby, Chocolatey Nuget, Perl, Python, NodeJS and NPM.
-
-To run this script, open up a Powershell window (as an Administrator), navigate (cd) into the 'installscripts' directory, and type:
-````
-powershell.exe setup.ps1
-````
-This will begin the installation process.
-
-Note: If running scripts is disabled on your machine, make sure to set the  '-ExecutionPolicy ByPass' option when executing the above command.
-
-Detailed instructions on how to install PHP in Windows can be found here:
-
-http://www.sitepoint.com/how-to-install-php-on-windows/
-
-You can also use Chocolatey to install PHP, however you will need to add 'C:\tools\php' to your path as this is not done automatically. Instructions on altering your path can be found here:
-
-http://windowsitpro.com/systems-management/how-can-i-add-new-folder-my-system-path
-
-After running this script and rebooting, you will need to navigate (cd) into the Collector directory and type:
-```````````
-gem install bundler
-bundle install
-```````````
+Installation
+------------
+#### Homebrew ####
+You can install the Bliss CLI using Homebrew:
+``````
+brew tap blissai/bliss
+brew install bliss
+``````
+You can then run the tool using:
+``````
+bliss
+``````
 
 Usage
 --------
@@ -136,21 +84,7 @@ Collector -> Stats -> Linter
 
 Task scheduling (Unix)
 ----------------------
-Bliss Collector uses the 'whenever' gem to manage cron scheduling. To set the task to run on a regular basis, open 'config/schedule.rb'. There is an existing task in the file that will run Collector, Stats and Linter in order. Just change the '1.minutes' to whatever interval you wish the job to run at, update your crontab by typing
-`bundle exec whenever --update-crontab`
-into your terminal from the collector directory.
-
-To stop scheduled tasks, just type
-`bundle exec whenever -c`
-into your terminal from the collector directory.
-
-Task scheduling (Windows)
--------------------------
-Windows users can schedule the collector to run every three hours by running the collector with an optional argument:
-
-````````````````````````````````
-jruby blisscollector.rb schedule
-````````````````````````````````
+We recommend using cron to run Bliss on a schedule.
 
 Notes
 -----

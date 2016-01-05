@@ -1,7 +1,7 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
   include Gitbase
-  def initialize(auto = false, beta = false)
+  def initialize(auto = false)
     # Load configuration File if it exists
     if File.exist? "#{File.expand_path('~/bliss-config.yml')}"
       @config = YAML.load_file("#{File.expand_path('~/bliss-config.yml')}")
@@ -88,11 +88,7 @@ class BlissRunner
   end
 
   def set_host
-    if @beta
-      @config['BLISS_HOST'] = 'https://beta.founderbliss.com'
-    else
-      @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
-    end
+    @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
   end
 
   def is_git_dir(dir)
