@@ -79,5 +79,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  $EXECUTE_COMMAND
+  echo "Docker is setup correctly."
 fi

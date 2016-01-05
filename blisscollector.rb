@@ -5,6 +5,8 @@ puts 'Initializing...'
 include CliTasks
 @args = ARGV
 
+exit unless DockerRunner.check_docker_settings
+
 if `docker images`.include? 'Cannot connect to the Docker daemon.'
   puts 'Docker is not running. Please start docker.'
   exit

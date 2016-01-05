@@ -94,7 +94,7 @@ Issues
 --------
 Issues are reported via github "Issues":
 
-https://github.com/founderbliss/collector/issues
+https://github.com/founderbliss/bliss-cli/issues
 
 To start working on an issue, take one that you can handle from the issue list. Assign it to yourself and start to work on it. Please close issues before taking new ones.
 

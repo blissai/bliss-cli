@@ -58,4 +58,10 @@ class DockerRunner
     stopped_containers = `docker ps -a -q`.split('\n').join(' ')
     puts `docker rm #{stopped_containers}` unless stopped_containers.empty?
   end
+
+  def self.check_docker_settings
+    return true if Gem.win_platform?
+    check_cmd = File.read('../scripts/dockercheck.sh')
+    system check_cmd
+  end
 end
