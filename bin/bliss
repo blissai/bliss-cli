@@ -41,6 +41,8 @@ invalid_docker_host() {
   invalid_setup "invalid DOCKER_HOST=$host, must be unset or unix:///var/run/docker.sock"
 }
 
+echo "OK $pwd"
+
 if command -v docker-machine > /dev/null 2>&1; then
   docker-machine ssh $DOCKER_MACHINE_NAME -- \
     test -S /var/run/docker.sock > /dev/null 2>&1 || socket_missing
@@ -62,6 +64,5 @@ else
 fi
 
 if [ -t 1 ]; then
-  echo "OK $pwd"
-  # ruby ../blisscollector.rb
+  ruby ../blisscollector.rb
 fi
