@@ -3,8 +3,10 @@ class BlissRunner
   include Gitbase
   def initialize(auto = false)
     # Load configuration File if it exists
-    if File.exist? "#{File.expand_path('~/.bliss/config.yml')}"
-      @config = YAML.load_file("#{File.expand_path('~/.bliss/config.yml')}")
+    @conf_dir = File.expand_path('~/.bliss')
+    @conf_path = "#{@conf_dir}/config.yml"
+    if File.exist? @conf_path
+      @config = YAML.load_file(@conf_path)
     else
       @config = {}
     end
@@ -21,8 +23,8 @@ class BlissRunner
     get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
     get_or_save_arg('What is the name of your organization in git?', 'ORG_NAME')
     set_host
-    FileUtils.mkdir_p "#{File.expand_path('~/.bliss')}"
-    File.open("#{File.expand_path('~/.bliss/config.yml')}", 'w') { |f| f.write @config.to_yaml } # Store
+    FileUtils.mkdir_p @conf_dir
+    File.open(@conf_path, 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green
   end
 
