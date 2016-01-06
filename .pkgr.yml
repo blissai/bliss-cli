@@ -1,1 +1,5 @@
 cli: false
+dependencies:
+  - ruby
+  - git
+  - docker
