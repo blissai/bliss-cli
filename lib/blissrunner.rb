@@ -3,8 +3,8 @@ class BlissRunner
   include Gitbase
   def initialize(auto = false)
     # Load configuration File if it exists
-    if File.exist? "#{File.expand_path('~/.bliss/bliss-config.yml')}"
-      @config = YAML.load_file("#{File.expand_path('~/.bliss/bliss-config.yml')}")
+    if File.exist? "#{File.expand_path('~/.bliss/config.yml')}"
+      @config = YAML.load_file("#{File.expand_path('~/.bliss/config.yml')}")
     else
       @config = {}
     end
@@ -21,7 +21,8 @@ class BlissRunner
     get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
     get_or_save_arg('What is the name of your organization in git?', 'ORG_NAME')
     set_host
-    File.open("#{File.expand_path('~/.bliss/bliss-config.yml')}", 'w') { |f| f.write @config.to_yaml } # Store
+    FileUtils.mkdir_p "#{File.expand_path('~/.bliss')}"
+    File.open("#{File.expand_path('~/.bliss/config.yml')}", 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green
   end
 
@@ -111,7 +112,7 @@ class BlissRunner
   # Checks for saved argument in config file, otherwise prompts user
   def get_or_save_arg(message, env_name)
     if @config && @config[env_name]
-      puts "Loading #{env_name} from bliss-config.yml...".blue
+      puts "Loading #{env_name} from config.yml...".blue
     else
       puts message.blue
       arg = gets.chomp

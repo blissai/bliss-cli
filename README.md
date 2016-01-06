@@ -71,10 +71,11 @@ To run the CLI, navigate (cd) to the Collector directory in a shell, and type:
 jruby blisscollector.rb
 ````` -->
 
-#### Configuration ####
+Configuration
+------------
 
-The first time you do this, you will be prompted for the information set out in the 'Information Required' section above.
-This information will be stored in a YAML file, bliss-config.yml, in home/.bliss for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
+The first time the CLI is run, you will be prompted for the information set out in the 'Information Required' section above.
+This information will be stored in a YAML file, $USER/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
 
 The commands available through the CLI tool are:
 *  Collector (C) - this command will collect metadata about your repositories and post them to Bliss
