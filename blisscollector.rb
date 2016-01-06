@@ -5,11 +5,10 @@ puts 'Initializing...'
 include CliTasks
 @args = ARGV
 
-exit unless DockerRunner.check_docker_settings
-
-if `docker images`.include? 'Cannot connect to the Docker daemon.'
-  puts 'Docker is not running. Please start docker.'
-  exit
+# Check that docker is running properly
+unless Gem.win_platform?
+  check_cmd = File.read("#{File.dirname($0)}/scripts/dockercheck.sh")
+  exit unless system check_cmd
 end
 
 if auto?
