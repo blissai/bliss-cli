@@ -1,6 +1,6 @@
-Collector agent
+Bliss CLI
 --------
-The Bliss Collector is a Ruby command-line application to collect repository and commit data for Bliss.ai.
+The Bliss CLI is a Ruby command-line application to collect repository and commit data for your Bliss projects.
 
 Information Required
 --------
@@ -11,12 +11,13 @@ You will need the following information before using Bliss's Collector:
 
 Dependencies
 --------
-Our CLI tool uses Docker to run our analysis in a controlled environment and Git to track your repostories' histories. As such, in order to use this tool, you will need to have Docker and Git installed.
+Our CLI tool uses Docker to run our analysis in a controlled environment and Git to track your projects' histories.
+
+The following is a list of required dependencies:
+*  Git
+*  Docker
 
 #### Git ####
-The following is a list of dependencies that are required to support:
-*  Git installation
-*  Docker
 
 For Ubuntu/Debian machines, execute the following in terminal:
 `````````
@@ -35,10 +36,10 @@ https://git-scm.com/download
 We recommend installing Docker by installing Docker Toolbox, which is located at:
 https://www.docker.com/docker-toolbox
 
-This package has contains everything needed to run Docker on Windows or OSX.
+This package contains everything needed to run Docker on Windows or OSX.
 
-#### Docker - Linux, CentOS etc ####
-To install Docker on Unix Operating Systems, follow the official Docker documentation for your Unix flavor at:
+#### Docker - Linux ####
+To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 https://docs.docker.com/engine/installation/
 
 Installation
@@ -46,27 +47,29 @@ Installation
 #### Homebrew ####
 You can install the Bliss CLI using Homebrew:
 ``````
-brew tap blissai/bliss
+brew tap founderbliss/homebrew-bliss
 brew install bliss
-``````
-You can then run the tool using:
-``````
-bliss
 ``````
 
 Usage
 --------
+#### Homebrew ####
+If you installed Bliss CLI with Homebrew, you can run the tool using:
+``````
+bliss
+``````
+
 #### Unix ####
 To run our Bliss CLI, navigate (cd) to the Collector directory in a shell, and type:
 `````
 ruby blisscollector.rb
 `````
 
-#### Windows ####
+<!-- #### Windows ####
 To run the CLI, navigate (cd) to the Collector directory in a shell, and type:
 `````
 jruby blisscollector.rb
-`````
+````` -->
 
 #### Configuration ####
 
@@ -86,9 +89,13 @@ Task scheduling (Unix)
 ----------------------
 We recommend using cron to run Bliss on a schedule.
 
+More information about cron can be found here:
+https://en.wikipedia.org/wiki/Cron
+
 Notes
 -----
-*  You will need to make sure that the machine the Collector runs on has the appropriate SSH keys setup, so that the application can 'git pull' without being prompted for a username/password combination.
+*  You will need to make sure that the machine the CLI runs on has the appropriate SSH keys setup, so that the application can 'git pull' without being prompted for a username/password combination.
+*  The first time you run this tool, it will take some time to go over each commit of each repository. We suggest running the tool through once before setting up a scheduled job.
 
 Issues
 --------
