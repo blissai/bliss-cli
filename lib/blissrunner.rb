@@ -8,7 +8,6 @@ class BlissRunner
     else
       @config = {}
     end
-    @beta = beta
     get_config unless auto
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
