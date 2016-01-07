@@ -54,7 +54,9 @@ class DockerRunner
   end
 
   def remove_stopped
-    stopped_containers = `docker ps -a -q`.split('\n').join(' ')
-    puts `docker rm #{stopped_containers}` unless stopped_containers.empty?
+    stopped_containers = `docker ps -a -q`.split("\n")
+    stopped_containers.each do |c|
+      puts `docker rm #{c}`
+    end
   end
 end
