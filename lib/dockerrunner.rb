@@ -39,14 +39,13 @@ class DockerRunner
   def pull_image
     puts 'Pulling docker image...'
     pull_cmd = "docker pull #{@image_name}"
-    result = []
-    Open3.popen3(pull_cmd)do |_stdin, stdout, stderr, wait_thr|
-      result << stderr.read
-      result << stdout.read
-      wait_thr.value
-    end
-    return if result.join('') !~ /Cannot connect to the Docker daemon/
-    puts 'Docker is not running. Please ensure docker is started.'.red
+    pull_success = system pull_cmd
+    return if pull_success
+    puts 'Docker is not running or is not configured correctly.'.red
+    puts 'You may need to start the docker daemon or restart your docker Virtual Machine.'.red
+    puts 'Also ensure you have an internet connection.'.red
+    puts "Docker Machine (OSX/Windows) users can try:\ndocker-machine restart default\neval \"$(docker-machine env default)\"".red
+    puts "Unix users can try:\nsudo service docker start".red
     exit
   end
 
