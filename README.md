@@ -53,6 +53,18 @@ brew install bliss
 
 Usage
 --------
+You will need to make sure that Docker is running and accessible before running the Bliss CLI.
+Docker Machine (Windows or OSX) users can do this by executing:
+```````````````
+docker-machine create default
+eval "$(docker-machine env default)"
+```````````````
+
+Linux users should ensure the Docker daemon is started:
+```````````````
+sudo service docker start
+```````````````
+
 #### Homebrew ####
 If you installed Bliss CLI with Homebrew, you can run the tool using:
 ``````

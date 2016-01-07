@@ -5,7 +5,7 @@ class DockerRunner
     @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = repos_dir
     @image_name = image_name
-    # pull_image
+    pull_image
   end
 
   def run(command)
@@ -18,7 +18,7 @@ class DockerRunner
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
-    collector_cmds = "jruby -J-Xmx2g /root/collector/blisscollector.rb #{command}"
+    collector_cmds = "jruby /root/collector/blisscollector.rb #{command}"
     "#{docker_cmd} --rm -t #{@image_name} #{collector_cmds}"
   end
 
