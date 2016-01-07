@@ -47,7 +47,7 @@ Installation
 #### Homebrew ####
 You can install the Bliss CLI using Homebrew:
 ``````
-brew tap founderbliss/homebrew-bliss
+brew tap founderbliss/homebrew-bliss-cli
 brew install bliss
 ``````
 
