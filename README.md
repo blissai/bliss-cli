@@ -9,6 +9,8 @@ You will need the following information before using Bliss's Collector:
 *  The path of the directory where all of your repositories are located
 *  Your git organization name
 
+** NOTE: You will need roughly 2gb of free space in order to install the Bliss Collector. **
+
 Dependencies
 --------
 Our CLI tool uses Docker to run our analysis in a controlled environment and Git to track your projects' histories.
@@ -29,21 +31,23 @@ For RPM-based systems such as Yum, execute the following in terminal:
 sudo yum install -y git
 `````````
 
-For other Operating Systems, you can download Git from:
+For other Operating Systems (Windows/OSX), you can download Git from:
 https://git-scm.com/download
 
 #### Docker - Windows or OSX ####
 We recommend installing Docker by installing Docker Toolbox, which is located at:
-https://www.docker.com/docker-toolbox
+<a href="https://www.docker.com/docker-toolbox" target="_blank">Docker Toolbox</a>
 
 This package contains everything needed to run Docker on Windows or OSX.
 
 #### Docker - Linux ####
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
-https://docs.docker.com/engine/installation/
+<a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
 
 Installation
 ------------
+**Please make sure you following the instructions above and have Docker installed correctly before installation.**
+
 #### Homebrew ####
 You can install the Bliss CLI using Homebrew:
 ``````
@@ -56,7 +60,7 @@ Usage
 You will need to make sure that Docker is running and accessible before running the Bliss CLI.
 Docker Machine (Windows or OSX) users can do this by executing:
 ```````````````
-docker-machine create default
+docker-machine create default # This may already be created. If so, just carry on.
 eval "$(docker-machine env default)"
 ```````````````
 
