@@ -38,7 +38,7 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 RUN gem update --system \
     && gem install bundler
 
-ENV BLISS_CLI_VERSION 6
+ENV BLISS_CLI_VERSION 8
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
