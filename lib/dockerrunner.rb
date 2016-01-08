@@ -44,7 +44,7 @@ class DockerRunner
     puts 'Docker is not running or is not configured correctly.'.red
     puts 'You may need to start the docker daemon or restart your docker Virtual Machine.'.red
     puts 'Also ensure you have an internet connection.'.red
-    puts "Docker Machine (OSX/Windows) users can try:\ndocker-machine create --driver \"generic\" default default # This may already be created. If so, just carry on.\neval \"$(docker-machine env default)\"".red
+    puts "Docker Machine (OSX/Windows) users can try:\ndocker-machine create --driver \"generic\" default # This may already be created. If so, just carry on.\neval \"$(docker-machine env default)\"".red
     puts "Unix users can try:\nsudo service docker start".red
     exit
   end
