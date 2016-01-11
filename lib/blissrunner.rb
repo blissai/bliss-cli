@@ -92,15 +92,17 @@ class BlissRunner
     @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
   end
 
-  def is_git_dir(dir)
-    system("cd #{dir} && git rev-parse")
+  def git_dir?(dir)
+    cmd = "cd #{dir} && git rev-parse"
+    cmd = "#{cmd} > /dev/null 2>&1" unless Gem.win_platform?
+    system(cmd)
   end
 
   def is_valid_arg(env, arg)
     if env.eql? 'TOP_LVL_DIR'
       if !File.directory?(arg)
         m = 'That is not a valid directory. Please enter a directory that contains your git repository folders.'
-      elsif is_git_dir(arg)
+      elsif git_dir?(arg)
         m = 'That is a git directory. Please enter a directory that contains your git repository folders, not the repository folders themselves.'
       end
       return { valid: m.nil?, msg: m }
