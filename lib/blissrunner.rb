@@ -10,7 +10,8 @@ class BlissRunner
     else
       @config = {}
     end
-    get_config unless auto
+    # get_config unless auto
+    get_config
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
     update_repositories
@@ -29,6 +30,7 @@ class BlissRunner
   end
 
   def choose_command
+    puts 'You should run the commands '
     puts 'Which command would you like to run? ((C)ollector, (S)tats, (L)inter or (Q)uit).'
     command = gets.chomp.upcase
     if command == 'C'

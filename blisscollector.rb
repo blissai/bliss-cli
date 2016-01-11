@@ -12,12 +12,12 @@ unless Gem.win_platform?
 end
 
 if auto?
-  puts 'Running scheduled Bliss job...'
+  puts 'Running Bliss CLI...'
   BlissRunner.new(true).automate
-elsif loop?
+# elsif loop?
   # The main program loop to accept commands for various tasks
-  BlissRunner.new.choose_command
-  puts 'Goodbye'
+  # BlissRunner.new.choose_command
+  # puts 'Goodbye'
 else
   puts 'Usage:'
   puts "collector\t\t Run the CLI tool normally and choose from a list of commands"

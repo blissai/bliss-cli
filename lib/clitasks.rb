@@ -1,6 +1,7 @@
 module CliTasks
   def auto?
-    (@args.size.eql? 1) && (@args[0].eql? "auto")
+    # (@args.size.eql? 1) && (@args[0].eql? "auto")
+    true
   end
 
   def scheduler?
