@@ -69,7 +69,7 @@ Usage
 You will need to make sure that Docker is running and accessible before running the Bliss CLI.
 Docker Machine (Windows or OSX) users can do this by executing:
 ```````````````
-docker-machine create --driver "generic" default default # This may already be created. If so, just carry on.
+docker-machine create --driver "generic" default # May already exist. If so, just carry on.
 eval "$(docker-machine env default)"
 ```````````````
 
