@@ -30,7 +30,6 @@ class BlissRunner
   end
 
   def choose_command
-    puts 'You should run the commands '
     puts 'Which command would you like to run? ((C)ollector, (S)tats, (L)inter or (Q)uit).'
     command = gets.chomp.upcase
     if command == 'C'
