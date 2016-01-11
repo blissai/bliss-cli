@@ -1,3 +1,2 @@
 ##!/bin/bash
-dir=$(dirname "$0")
-ruby $dir/../blisscollector.rb "$@"
+/opt/bliss-cli/bin/ruby /opt/bliss-cli/blisscollector.rb "$@"

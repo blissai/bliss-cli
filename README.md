@@ -9,7 +9,7 @@ You will need the following information before using Bliss's Collector:
 *  The path of the directory where all of your repositories are located
 *  Your git organization name
 
-** NOTE: You will need roughly 2gb of free space in order to install the Bliss Collector. **
+**NOTE: You will need roughly 2gb of free space in order to install the Bliss Collector.**
 
 Dependencies
 --------
@@ -18,6 +18,10 @@ Our CLI tool uses Docker to run our analysis in a controlled environment and Git
 The following is a list of required dependencies:
 *  Git
 *  Docker
+*  Homebrew (for OSX installations)
+
+You can download and install Homebrew from:
+http://brew.sh/
 
 #### Git ####
 
