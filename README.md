@@ -102,14 +102,14 @@ Configuration
 The first time the CLI is run, you will be prompted for the information set out in the 'Information Required' section above.
 This information will be stored in a YAML file, $USER/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
 
-The commands available through the CLI tool are:
+<!-- The commands available through the CLI tool are:
 *  Collector (C) - this command will collect metadata about your repositories and post them to Bliss
 *  Stats (S) - this command will log all of your commits with Bliss, and calculate data such as Lines of Code, Test Lines of Code etc.
 *  Linter (L) - this command will run linters over all of your outstanding commits and send the linting data to Bliss for analysis
 
 These should be run in the following order:
 
-Collector -> Stats -> Linter
+Collector -> Stats -> Linter -->
 
 Task scheduling (Unix)
 ----------------------
