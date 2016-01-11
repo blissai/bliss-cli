@@ -1,3 +1,3 @@
-cli: false
+cli: bin/bliss
 dependencies:
   - git
