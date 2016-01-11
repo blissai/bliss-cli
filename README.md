@@ -9,7 +9,7 @@ You will need the following information before using Bliss's Collector:
 *  The path of the directory where all of your repositories are located
 *  Your git organization name
 
-**NOTE: You will need roughly 2gb of free space in order to install the Bliss Collector.**
+**NOTE: You will need roughly 2gb of free space in order to install the Bliss CLI Tool.**
 
 Dependencies
 --------
