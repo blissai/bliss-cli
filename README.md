@@ -9,7 +9,7 @@ You can login to your Bliss Dashboard at the link below:
 Information Required
 --------
 You will need the following information before using Bliss's Collector:
-*  Your Bliss API Key - You can find this by logging into bliss.ai, clicking on the <a href="https://app.blissai.com/users/edit">Settings</a> wheel, scrolling the the bottom and clicking "Show" on the API Key bar
+*  Your Bliss API Key - You can find this by logging into bliss.ai, clicking on the <a href="https://app.blissai.com/users/edit" target="_blank">Settings</a> wheel, scrolling the the bottom and clicking "Show" on the API Key bar
 *  The path of the directory where all of your repositories are located
 *  Your git organization name
 
