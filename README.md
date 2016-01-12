@@ -70,7 +70,7 @@ brew tap founderbliss/homebrew-bliss-cli
 brew install bliss
 ``````
 
-#### Apt (Ubuntu) ####
+#### APT (Ubuntu) ####
 Ubuntu users can install the Bliss CLI using Apt:
 ``````
 wget -qO - https://deb.packager.io/key | sudo apt-key add -
@@ -108,16 +108,22 @@ sudo service docker start
 ```````````````
 
 #### Homebrew, APT or Yum ####
-If you installed Bliss CLI with Homebrew, Apt or YUM, you can run the tool using:
+If you installed Bliss CLI with Homebrew, APT or YUM, you can run the tool using:
 ``````
 bliss
 ``````
 
-#### Manual Install ####
+#### Manual ####
 To run the Bliss CLI from a manual installation, navigate (cd) to the git directory in a shell, and type:
 `````
 ruby blisscollector.rb
 `````
+
+#### What the tool does ####
+The CLI will run three different tasks. These are:
+* Perform a git log on your repositories to get a list of commits.
+* Analyze each commit for stats such as lines of code, test coverage etc.
+* Run various linting tools over each commit in order to track technical debt over time.
 
 <!-- #### Windows ####
 To run the CLI, navigate (cd) to the Collector directory in a shell, and type:
