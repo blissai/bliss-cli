@@ -2,8 +2,8 @@ Bliss CLI
 --------
 The Bliss CLI is a Ruby command-line application to collect repository and commit data for your Bliss projects.
 
-You can login to your Bliss Dashboard at:
-https://app.blissai.com/users/sign_in
+You can login to your Bliss Dashboard at the link below:
+<a href="https://app.blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
 
 Information Required
 --------
