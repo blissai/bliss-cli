@@ -53,15 +53,15 @@ This package contains everything needed to run Docker on Windows or OSX.
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 <a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
 
-**Make sure that you add your user to the Docker group and reboot after doing this:**
+Make sure that you **add your user** to the Docker group and **reboot after doing this**:
 ````````
 sudo usermod -aG docker <your_username>
 ````````
 
 Installation
 ------------
-**Please make sure you following the instructions above and have Docker installed correctly before installation.**
-**If deploying on Amazon Web Services, please select an Amazon Machine Image other than the default Amazon AMI.**
+Please make sure you following the instructions above and have **Docker installed** correctly before installation.
+If deploying on Amazon Web Services, **do not use the default Amazon AMI**.
 
 #### Homebrew ####
 You can install the Bliss CLI using Homebrew:
