@@ -22,7 +22,7 @@ Our CLI tool uses Docker to run our analysis in a controlled environment and Git
 The following is a list of required dependencies:
 *  Git
 *  Docker
-*  Ruby 2.x
+*  Ruby 2.x (for OSX or Windows installations)
 *  Homebrew (for OSX installations)
 
 You can download and install Homebrew from:
