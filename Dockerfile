@@ -38,12 +38,12 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 RUN gem update --system \
     && gem install bundler
 
-ENV BLISS_CLI_VERSION 16
+ENV BLISS_CLI_VERSION 18
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
     && cd /root/collector \
-    && bundle install
+    && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml
 
 # Set default encoding
 ENV LC_ALL en_US.UTF-8
