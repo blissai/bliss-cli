@@ -61,6 +61,7 @@ sudo usermod -aG docker <your_username>
 Installation
 ------------
 **Please make sure you following the instructions above and have Docker installed correctly before installation.**
+**If deploying on Amazon Web Services, please select an Amazon Machine Image other than the default Amazon AMI.**
 
 #### Homebrew ####
 You can install the Bliss CLI using Homebrew:
