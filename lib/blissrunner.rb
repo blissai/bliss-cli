@@ -52,9 +52,11 @@ class BlissRunner
     if configured?
       @docker_runner.run('collector')
       # Sleep to wait for workers to finish
+      puts "Waiting 60 seconds to before running Stats task...".green
       sleep(60)
       @docker_runner.run('stats')
       # Sleep to wait for workers to finish
+      puts "Waiting 60 seconds to before running Linting task...".green
       sleep(60)
       @docker_runner.run('linter')
     else
