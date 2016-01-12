@@ -53,10 +53,10 @@ class BlissRunner
       @docker_runner.run('collector')
       # Sleep to wait for workers to finish
       sleep(60)
-      @docker_runner.run('linter')
+      @docker_runner.run('stats')
       # Sleep to wait for workers to finish
       sleep(60)
-      @docker_runner.run('stats')
+      @docker_runner.run('linter')
     else
       puts 'Collector has not been configured. Cannot run auto-task.'.red
     end
