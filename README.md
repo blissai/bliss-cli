@@ -136,6 +136,8 @@ To run the CLI, navigate (cd) to the Collector directory in a shell, and type:
 jruby blisscollector.rb
 ````` -->
 
+If everything ran smoothly, you can visit your <a href="https://app.blissai.com/projects" target="_blank">Dashboard here</a>.
+If something went wrong, please email us at <a href="mailto:hello@bliss.ai">hello@bliss.ai</a> so we can provide you some assistance.
 Configuration
 ------------
 
