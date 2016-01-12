@@ -20,6 +20,6 @@ if auto?
   # puts 'Goodbye'
 else
   puts 'Usage:'
-  puts "collector\t\t Run the CLI tool normally and choose from a list of commands"
-  puts "collector auto\t\t Run Collector, Stats and Linter all in one"
+  puts "bliss\t\t Run the CLI."
+  puts "bliss help\t\t Display this help message."
 end

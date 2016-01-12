@@ -18,6 +18,7 @@ Our CLI tool uses Docker to run our analysis in a controlled environment and Git
 The following is a list of required dependencies:
 *  Git
 *  Docker
+*  Ruby 2.x
 *  Homebrew (for OSX installations)
 
 You can download and install Homebrew from:
@@ -27,12 +28,12 @@ http://brew.sh/
 
 For Ubuntu/Debian machines, execute the following in terminal:
 `````````
-sudo apt-get install git
+sudo apt-get -y install git
 `````````
 
 For RPM-based systems such as Yum, execute the following in terminal:
 `````````
-sudo yum install -y git
+sudo yum -y install git
 `````````
 
 For other Operating Systems (Windows/OSX), you can download Git from:
@@ -48,6 +49,11 @@ This package contains everything needed to run Docker on Windows or OSX.
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 <a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
 
+**Make sure that you add your user to the Docker group and reboot after doing this:**
+````````
+sudo usermod -aG docker <your_username>
+````````
+
 Installation
 ------------
 **Please make sure you following the instructions above and have Docker installed correctly before installation.**
@@ -58,18 +64,41 @@ You can install the Bliss CLI using Homebrew:
 brew update
 brew doctor
 ``````
-fix any issues reported by doctor, then once brew is working perfectly
+Fix any issues reported by doctor, then once brew is working perfectly:
 ``````
 brew tap founderbliss/homebrew-bliss-cli
 brew install bliss
 ``````
+
+#### Apt (Ubuntu) ####
+Ubuntu users can install the Bliss CLI using Apt:
+``````
+wget -qO - https://deb.packager.io/key | sudo apt-key add -
+echo "deb https://deb.packager.io/gh/founderbliss/bliss-cli trusty master" | sudo tee /etc/apt/sources.list.d/bliss-cli.list
+sudo apt-get update
+sudo apt-get install bliss
+``````
+
+#### RPM (CentOS, Fedora, RedHat etc) ####
+RPM-based Linux users can install Bliss CLI using yum:
+``````
+sudo rpm --import https://rpm.packager.io/key
+echo "[bliss-cli]
+name=Repository for founderbliss/bliss-cli application.
+baseurl=https://rpm.packager.io/gh/founderbliss/bliss-cli/centos6/master
+enabled=1" | sudo tee /etc/yum.repos.d/bliss-cli.repo
+sudo yum install bliss
+``````
+
+#### Manual ####
+You can also simply clone this repository and run the CLI from the git directory.
 
 Usage
 --------
 You will need to make sure that Docker is running and accessible before running the Bliss CLI.
 Docker Machine (Windows or OSX) users can do this by executing:
 ```````````````
-docker-machine create --driver "generic" default # May already exist. If so, just carry on.
+docker-machine create --driver virtualbox default # May already exist. If so, just carry on.
 eval "$(docker-machine env default)"
 ```````````````
 
@@ -78,14 +107,14 @@ Linux users should ensure the Docker daemon is started:
 sudo service docker start
 ```````````````
 
-#### Homebrew ####
-If you installed Bliss CLI with Homebrew, you can run the tool using:
+#### Homebrew, APT or Yum ####
+If you installed Bliss CLI with Homebrew, Apt or YUM, you can run the tool using:
 ``````
 bliss
 ``````
 
-#### Unix ####
-To run our Bliss CLI, navigate (cd) to the Collector directory in a shell, and type:
+#### Manual Install ####
+To run the Bliss CLI from a manual installation, navigate (cd) to the git directory in a shell, and type:
 `````
 ruby blisscollector.rb
 `````
@@ -123,7 +152,7 @@ You can do this by wrapping the docker command and the bliss command into a scri
 
 For OSX the following should work as a cron (OSX) script:
 ```````````````
-docker-machine create --driver "generic" default # May already exist. If so, just carry on.
+docker-machine create --driver virtualbox default # May already exist. If so, just carry on.
 eval "$(docker-machine env default)"
 bliss [options]
 ```````````````
