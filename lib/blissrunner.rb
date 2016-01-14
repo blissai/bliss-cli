@@ -97,7 +97,11 @@ class BlissRunner
 
   def git_dir?(dir)
     cmd = "cd #{dir} && git rev-parse"
-    cmd = "#{cmd} > /dev/null 2>&1" unless Gem.win_platform?
+    if Gem.win_platform?
+      cmd = "#{cmd} > $null"
+    else
+      cmd = "#{cmd} > /dev/null 2>&1"
+    end
     system(cmd)
   end
 

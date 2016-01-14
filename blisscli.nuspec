@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>blisscli</id>
+    <title>Bliss CLI</title>
+    <version>1.0.27</version>
+    <authors>Bliss Inc</authors>
+    <owners>Bliss Inc</owners>
+    <summary>Bliss Command Line Tool</summary>
+    <description>The Bliss CLI is a Ruby command-line application to collect repository and commit data for your Bliss projects.</description>
+    <projectUrl>https://github.com/founderbliss/bliss-cli</projectUrl>
+    <tags>Bliss</tags>
+    <dependencies>
+      <dependency id='git' />
+      <dependency id='ruby' />
+      <dependency id='ruby2.devkit' />
+    </dependencies>
+  </metadata>
+  <files>
+    <files>
+      <file src="lib\*" target="lib" />
+      <file src="blisscollector.rb" target="" />
+      <file src="Gemfile" target="" />
+      <file src="Gemfile.lock" target="" />
+    </files>
+  </files>
+</package>
+<!-- character encoding: “UTF-8” -->
