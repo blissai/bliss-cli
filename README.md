@@ -94,6 +94,11 @@ enabled=1" | sudo tee /etc/yum.repos.d/bliss-cli.repo
 sudo yum install bliss
 ``````
 
+#### Windows ####
+Windows users can simply download our executable file, at:
+https://s3.amazonaws.com/bliss-cli-win/bliss.exe
+You will still need to ensure that the Git and Docker dependencies are met.
+
 #### Manual ####
 You can also simply clone this repository and run the CLI from the git directory.
 
@@ -115,6 +120,12 @@ sudo service docker start
 If you installed Bliss CLI with Homebrew, APT or YUM, you can run the tool using:
 ``````
 bliss
+``````
+
+#### Windows ####
+Windows users can just run the aforementioned executable, by navigating to the directory in powershell and typing:
+``````
+.\bliss.exe
 ``````
 
 #### Manual ####
