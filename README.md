@@ -10,6 +10,8 @@ This tool supports the following languages at the moment:
 * Perl
 * PHP
 * Java
+* Objective-C
+* C++
 
 You can login to your Bliss Dashboard at the link below:
 
