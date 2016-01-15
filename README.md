@@ -3,9 +3,9 @@ Bliss CLI
 The Bliss CLI is a Ruby command-line application to collect repository and commit data for your Bliss projects.
 
 This tool supports the following languages at the moment:
-* Ruby (and Rails)
+* Ruby
 * Python
-* Javascript (and NodeJS)
+* Javascript
 * CSS
 * Perl
 * PHP
