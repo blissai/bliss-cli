@@ -9,12 +9,14 @@ FROM yajo/centos-epel
 RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk-devel
 
 # Install Tailor
+ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor \
     && cd ~/tailor \
-    && scripts/bootstrap
-    && scripts/test
-    && ./gradlew build
+    && scripts/bootstrap \
+    && scripts/test \
+    && ./gradlew build \
     && ./gradlew install
+
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
