@@ -12,8 +12,8 @@ RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk-
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor \
     && cd ~/tailor \
-    && scripts/bootstrap \
-    && scripts/test \
+    && script/bootstrap \
+    && script/test \
     && ./gradlew build \
     && ./gradlew install
 
