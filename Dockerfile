@@ -6,8 +6,15 @@
 FROM yajo/centos-epel
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.7.0-openjdk-devel java-1.7.0-openjdk
+RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk-devel
 
+# Install Tailor
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor \
+    && cd ~/tailor \
+    && scripts/bootstrap
+    && scripts/test
+    && ./gradlew build
+    && ./gradlew install
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
@@ -38,7 +45,7 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 RUN gem update --system \
     && gem install bundler
 
-ENV BLISS_CLI_VERSION 18
+ENV BLISS_CLI_VERSION 19
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
