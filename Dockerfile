@@ -12,13 +12,6 @@ RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 
-# Install Tailor
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
-      cd ~/tailor && \
-      script/bootstrap && \
-      ./gradlew install
-
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
@@ -48,6 +41,13 @@ ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 # Update system gems and install bundler
 RUN gem update --system \
     && gem install bundler
+
+# Install Tailor
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
+    cd ~/tailor && \
+    script/bootstrap && \
+    ./gradlew install
 
 ENV BLISS_CLI_VERSION 19
 
