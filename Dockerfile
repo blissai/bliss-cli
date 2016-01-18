@@ -12,6 +12,14 @@ RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 
+# Install Tailor
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
+      script/bootstrap && \
+      script/test && \
+      ./gradlew build && \
+      ./gradlew install
+
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
@@ -53,13 +61,6 @@ RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collecto
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-
-# Install Tailor
-# RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
-# RUN cd ~/tailor && script/bootstrap && \
-#     cd ~/tailor && script/test && \
-#     cd ~/tailor && ./gradlew build && \
-#     cd ~/tailor && ./gradlew install
 
 WORKDIR /root
 
