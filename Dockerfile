@@ -16,8 +16,6 @@ ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
       script/bootstrap && \
-      script/test && \
-      ./gradlew build && \
       ./gradlew install
 
 # Install Node.js
