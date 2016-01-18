@@ -19,11 +19,10 @@ RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
 
 # Install Tailor
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
-RUN cd ~/tailor && \
-    script/bootstrap && \
-    script/test && \
-    ./gradlew build && \
-    ./gradlew install
+RUN cd ~/tailor && script/bootstrap && \
+    cd ~/tailor && script/test && \
+    cd ~/tailor && ./gradlew build && \
+    cd ~/tailor && ./gradlew install
 
 # Clone phpcs & wpcs & pmd & jshint-json & ocstyle
 RUN cd /root \
