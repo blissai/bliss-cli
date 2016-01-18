@@ -6,16 +6,16 @@
 FROM yajo/centos-epel
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0 java-1.8.0-openjdk-devel
+RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel && \
+    yum clean all
 
 # Install Tailor
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor \
-    && cd ~/tailor \
-    && script/bootstrap \
-    && script/test \
-    && ./gradlew build \
-    && ./gradlew install
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
+RUN ~/tailor/script/bootstrap
+RUN ~/tailor/script/test
+RUN ~/tailor/gradlew build
+RUN ~/tailor/gradlew install
 
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
