@@ -9,19 +9,21 @@ FROM yajo/centos-epel
 RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel && \
     yum clean all
 
-# Install Tailor
+# Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
-    cd ~/tailor && \
-    script/bootstrap && \
-    script/test && \
-    ./gradlew build && \
-    ./gradlew install
 
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
     && npm install -g jshint csslint
+
+# Install Tailor
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
+RUN cd ~/tailor && \
+    script/bootstrap && \
+    script/test && \
+    ./gradlew build && \
+    ./gradlew install
 
 # Clone phpcs & wpcs & pmd & jshint-json & ocstyle
 RUN cd /root \
