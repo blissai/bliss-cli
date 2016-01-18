@@ -17,13 +17,6 @@ RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
     && npm install -g jshint csslint
 
-# Install Tailor
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
-RUN cd ~/tailor && script/bootstrap && \
-    cd ~/tailor && script/test && \
-    cd ~/tailor && ./gradlew build && \
-    cd ~/tailor && ./gradlew install
-
 # Clone phpcs & wpcs & pmd & jshint-json & ocstyle
 RUN cd /root \
     && mkdir vendor \
@@ -60,6 +53,13 @@ RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collecto
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
+
+# Install Tailor
+# RUN git clone https://github.com/founderbliss/tailor.git ~/tailor
+# RUN cd ~/tailor && script/bootstrap && \
+#     cd ~/tailor && script/test && \
+#     cd ~/tailor && ./gradlew build && \
+#     cd ~/tailor && ./gradlew install
 
 WORKDIR /root
 
