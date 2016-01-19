@@ -198,7 +198,7 @@ system_profiler SPHardwareDataType | grep 'Total Number of Cores'
 After determining how many cores you want to assign, run the following commands to configure your VM:
 ```````````````
 docker-machine stop default
-VBoxManage modifyvm MACHINE_NAME --cpus NUM_CORES_TO_ASSIGN
+VBoxManage modifyvm default --cpus NUM_CORES_TO_ASSIGN
 docker-machine start default
 ```````````````
 
