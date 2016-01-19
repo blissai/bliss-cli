@@ -60,7 +60,7 @@ We recommend installing Docker by installing Docker Toolbox, which is located at
 
 This package contains everything needed to run Docker on Windows or OSX.
 
-**Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. ['You can find out how to do this here.'](#virtualbox-configuration)**
+**Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. [You can find out how to do this here.](#virtualbox-configuration)**
 
 #### Docker - Linux ####
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
