@@ -60,6 +60,8 @@ We recommend installing Docker by installing Docker Toolbox, which is located at
 
 This package contains everything needed to run Docker on Windows or OSX.
 
+**Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. ['You can find out how to do this here.'](#virtualbox-configuration)**
+
 #### Docker - Linux ####
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 <a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
@@ -175,6 +177,27 @@ This information will be stored in a YAML file, $USER/.bliss/config.yml for futu
 These should be run in the following order:
 
 Collector -> Stats -> Linter -->
+
+Virtualbox Configuration (for Docker Machine users)
+----------------------------------------------------
+In order to configure VirtualBox to assign more cores to the VM, do the following:
+
+Firstly, find out how many cores your machine has:
+Windows Powershell
+```````````````````
+Get-WmiObject -class Win32_processor | ft NumberOfCores
+```````````````````
+OSX
+``````````
+system_profiler SPHardwareDataType | grep 'Total Number of Cores'
+``````````
+
+After determining how many cores you want to assign, run the following commands to configure your VM:
+```````````````
+docker-machine stop default
+VBoxManage modifyvm MACHINE_NAME --cpus NUM_CORES_TO_ASSIGN
+docker-machine start default
+```````````````
 
 Task scheduling (Unix)
 ----------------------
