@@ -181,6 +181,7 @@ Collector -> Stats -> Linter -->
 Virtualbox Configuration
 ------------------------
 **FOR DOCKER MACHINE USERS ONLY**
+
 In order to configure VirtualBox to assign more cores to the VM, do the following:
 
 Firstly, find out how many cores your machine has:
