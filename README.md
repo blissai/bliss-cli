@@ -184,12 +184,13 @@ Virtualbox Configuration
 
 In order to configure VirtualBox to assign more cores to the VM, do the following:
 
-Firstly, find out how many cores your machine has:
-Windows Powershell
+Firstly, find out how many cores your machine has. Don't try to assign more cores than your physical machine has.
+
+Windows Powershell:
 ```````````````````
 Get-WmiObject -class Win32_processor | ft NumberOfCores
 ```````````````````
-OSX
+OSX:
 ``````````
 system_profiler SPHardwareDataType | grep 'Total Number of Cores'
 ``````````
