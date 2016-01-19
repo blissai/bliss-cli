@@ -105,6 +105,13 @@ class BlissRunner
     system(cmd)
   end
 
+  def format_arg(env, arg)
+    if env.eql? 'ORG_NAME'
+      return arg.strip.gsub(' ', '-')
+    end
+    return arg
+  end
+
   def is_valid_arg(env, arg)
     if env.eql? 'TOP_LVL_DIR'
       if !File.directory?(arg)
@@ -123,6 +130,9 @@ class BlissRunner
   # Checks for saved argument in config file, otherwise prompts user
   def get_or_save_arg(message, env_name)
     if @config && @config[env_name]
+      # Backwards compatibility
+      unformatted = @config[env_name]
+      @config[env_name] = format_arg(env_name, unformatted)
       puts "Loading #{env_name} from config.yml...".blue
     else
       puts message.blue
@@ -132,7 +142,7 @@ class BlissRunner
       if !valid[:valid]
         get_or_save_arg(valid[:msg], env_name)
       else
-        @config[env_name] = arg
+        @config[env_name] = format_arg(env_name, arg)
       end
     end
   end
