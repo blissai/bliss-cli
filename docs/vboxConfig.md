@@ -15,9 +15,17 @@ OSX:
 system_profiler SPHardwareDataType | grep 'Total Number of Cores'
 ``````````
 
-After determining how many cores you want to assign, run the following commands to configure your VM:
+After determining how many cores you want to assign, run the following commands to configure your VM.
+
+OSX:
 ```````````````
 docker-machine stop default
 VBoxManage modifyvm default --cpus NUM_CORES_TO_ASSIGN
+docker-machine start default
+```````````````
+Windows:
+```````````````
+docker-machine stop default
+$PATH_TO_VIRTUALBOX_INSTALL/VBoxManage.exe modifyvm default --cpus NUM_CORES_TO_ASSIGN
 docker-machine start default
 ```````````````
