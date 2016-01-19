@@ -60,8 +60,6 @@ We recommend installing Docker by installing Docker Toolbox, which is located at
 
 This package contains everything needed to run Docker on Windows or OSX.
 
-**Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. [You can find out how to do this here.](#virtualbox-configuration)**
-
 #### Docker - Linux ####
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 <a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
@@ -178,53 +176,14 @@ These should be run in the following order:
 
 Collector -> Stats -> Linter -->
 
-Virtualbox Configuration
-------------------------
-**FOR DOCKER MACHINE USERS ONLY**
-
-In order to configure VirtualBox to assign more cores to the VM, do the following:
-
-Firstly, find out how many cores your machine has. Don't try to assign more cores than your physical machine has.
-
-Windows Powershell:
-```````````````````
-Get-WmiObject -class Win32_processor | ft NumberOfCores
-```````````````````
-OSX:
-``````````
-system_profiler SPHardwareDataType | grep 'Total Number of Cores'
-``````````
-
-After determining how many cores you want to assign, run the following commands to configure your VM:
-```````````````
-docker-machine stop default
-VBoxManage modifyvm default --cpus NUM_CORES_TO_ASSIGN
-docker-machine start default
-```````````````
-
-Task scheduling (Unix)
-----------------------
-We recommend using cron to run Bliss on a schedule.
-
-More information about cron can be found here:
-https://en.wikipedia.org/wiki/Cron
-
-You will need to make sure that when you setup a cron script, you ensure that the cron process has access to Docker.
-You can do this by wrapping the docker command and the bliss command into a script.
-
-For OSX the following should work as a cron (OSX) script:
-```````````````
-docker-machine create --driver virtualbox default # May already exist. If so, just carry on.
-eval "$(docker-machine env default)"
-bliss [options]
-```````````````
-
-For Linux users, ensuring that the docker daemon is running will suffice. You can then set cron up to run the blisscollector.rb ruby script.
-
 Notes
 -----
 *  You will need to make sure that the machine the CLI runs on has the appropriate SSH keys setup, so that the application can 'git pull' without being prompted for a username/password combination.
+*  In order to keep your dashboard up to date, we recommend scheduling a recurring job to run this tool. [You can find out how to do this here.](docs/taskSched.md)
 *  The first time you run this tool, it will take some time to go over each commit of each repository. We suggest running the tool through once before setting up a scheduled job.
+*  Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. [You can find out how to do this here.](docs/vboxConfig.md)
+
+
 
 Issues
 --------
