@@ -133,7 +133,7 @@ class BlissRunner
       # Backwards compatibility
       unformatted = @config[env_name]
       @config[env_name] = format_arg(env_name, unformatted)
-      puts "Loading #{env_name} from config.yml...".blue
+      puts "Loading #{env_name} from ~/.bliss/config.yml...  #{@config[env_name]}".blue
     else
       puts message.blue
       arg = gets.chomp
