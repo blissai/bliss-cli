@@ -5,7 +5,7 @@ class DockerRunner
     @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = repos_dir
     @image_name = image_name
-    # pull_image
+    pull_image
   end
 
   def run
