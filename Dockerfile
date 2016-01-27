@@ -32,7 +32,7 @@ RUN cd /root \
 RUN yum install -y 'perl(Perl::Critic)'
 
 # Install pip modules
-RUN pip install importlib argparse lizard django prospector
+RUN pip install importlib argparse lizard django prospector parcon ocstyle
 
 # Install JRuby
 RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
