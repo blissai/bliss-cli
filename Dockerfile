@@ -32,7 +32,7 @@ RUN cd /root \
 RUN yum install -y 'perl(Perl::Critic)'
 
 # Install pip modules
-RUN pip install importlib argparse lizard django prospector
+RUN pip install importlib argparse lizard django prospector parcon ocstyle
 
 # Install JRuby
 RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
@@ -49,12 +49,14 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     script/bootstrap && \
     ./gradlew install
 
-ENV BLISS_CLI_VERSION 24
+ENV BLISS_CLI_VERSION 37
 
 # Get collector tasks and gems
+# RUN git clone -b restructure https://github.com/founderbliss/collector-tasks.git /root/collector \
 RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
     && cd /root/collector \
-    && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml
+    && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
+    && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
 # Set default encoding
 ENV LC_ALL en_US.UTF-8

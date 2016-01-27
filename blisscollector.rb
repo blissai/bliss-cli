@@ -13,11 +13,7 @@ end
 
 if auto?
   puts 'Running Bliss CLI...'
-  BlissRunner.new(true).automate
-# elsif loop?
-  # The main program loop to accept commands for various tasks
-  # BlissRunner.new.choose_command
-  # puts 'Goodbye'
+  BlissRunner.new.automate
 else
   puts 'Usage:'
   puts "bliss\t\t Run the CLI."

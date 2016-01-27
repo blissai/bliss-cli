@@ -1,7 +1,7 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
   include Gitbase
-  def initialize(auto = false)
+  def initialize
     # Load configuration File if it exists
     @conf_dir = File.expand_path('~/.bliss')
     @conf_path = "#{@conf_dir}/config.yml"
@@ -10,7 +10,7 @@ class BlissRunner
     else
       @config = {}
     end
-    # get_config unless auto
+
     get_config
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
@@ -29,36 +29,10 @@ class BlissRunner
     puts 'Collector configured.'.green
   end
 
-  def choose_command
-    puts 'Which command would you like to run? ((C)ollector, (S)tats, (L)inter or (Q)uit).'
-    command = gets.chomp.upcase
-    if command == 'C'
-      puts 'Running Collector'
-      @docker_runner.run('collector')
-    elsif command == 'L'
-      puts 'Running Linter'
-      @docker_runner.run('linter')
-    elsif command == 'S'
-      puts 'Running Stats'
-      @docker_runner.run('stats')
-    else
-      puts 'Not a valid option. Please choose Collector, Lint, Stats or Quit.' unless command == 'Q'
-    end
-    choose_command unless command.eql? 'Q'
-  end
-
   # A function that automates the above three functions for a scheduled job
   def automate
     if configured?
-      @docker_runner.run('collector')
-      # Sleep to wait for workers to finish
-      puts "Waiting 60 seconds to before running Stats task...".green
-      sleep(60)
-      @docker_runner.run('stats')
-      # Sleep to wait for workers to finish
-      puts "Waiting 60 seconds to before running Linting task...".green
-      sleep(60)
-      @docker_runner.run('linter')
+      @docker_runner.run
     else
       puts 'Collector has not been configured. Cannot run auto-task.'.red
     end
@@ -66,29 +40,6 @@ class BlissRunner
 
   def configured?
     !@config['TOP_LVL_DIR'].empty? && !@config['ORG_NAME'].empty? && !@config['API_KEY'].empty? && !@config['BLISS_HOST'].empty?
-  end
-
-  def task_sched(option)
-    # Choose frequency
-    if option == 1
-      freq = '/SC DAILY'
-    elsif option == 2
-      freq = '/SC HOURLY'
-    else
-      freq = '/SC MINUTE /MO 10'
-    end
-
-    # Get current path
-    cwd = `@powershell $pwd.path`.gsub(/\n/, '')
-    task_cmd = "cd  #{cwd}\nruby blissauto.rb"
-
-    # create batch file
-    file_name = "#{cwd}\\blisstask.bat"
-    File.open(file_name, 'w') { |file| file.write(task_cmd) }
-
-    # schedule task with schtasks
-    cmd = "schtasks /Create #{freq} /TN BlissCollector /TR #{file_name}"
-    `#{cmd}`
   end
 
   def set_host
