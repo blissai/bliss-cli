@@ -8,17 +8,17 @@ class DockerRunner
     pull_image
   end
 
-  def run(command)
-    system docker_start_cmd(command)
+  def run
+    system docker_start_cmd
     remove_stopped
   end
 
-  def docker_start_cmd(command)
+  def docker_start_cmd
     docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
-    collector_cmds = "jruby /root/collector/blisscollector.rb #{command}"
+    collector_cmds = 'jruby /root/collector/blisscollector.rb'
     "#{docker_cmd} --rm -t #{@image_name} #{collector_cmds}"
   end
 
