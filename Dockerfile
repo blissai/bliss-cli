@@ -6,7 +6,7 @@
 FROM yajo/centos-epel
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel && \
+RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn && \
     yum clean all
 
 # Set max heap space for java
@@ -43,7 +43,7 @@ RUN gem update --system \
     && gem install bundler
 
 # Install Tailor
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.65-3.b17.el7.x86_64
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     cd ~/tailor && \
     script/bootstrap && \
@@ -52,8 +52,7 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
 ENV BLISS_CLI_VERSION 37
 
 # Get collector tasks and gems
-# RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
-RUN git clone https://github.com/founderbliss/collector-tasks.git /root/collector \
+RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
     && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
