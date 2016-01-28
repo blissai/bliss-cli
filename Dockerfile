@@ -49,7 +49,7 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     script/bootstrap && \
     ./gradlew install
 
-ENV BLISS_CLI_VERSION 38
+ENV BLISS_CLI_VERSION 39
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
