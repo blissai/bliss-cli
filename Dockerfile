@@ -17,11 +17,8 @@ RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
     && npm install -g jshint csslint
 
-# Clone phpcs & wpcs & pmd & jshint-json & ocstyle
+# Clone phpcs & wpcs & pmd & ocstyle
 RUN cd /root \
-    && mkdir vendor \
-    && cd /root/vendor \
-    && git clone https://github.com/sindresorhus/jshint-json.git jshint-json \
     && git clone https://github.com/founderbliss/ocstyle.git /root/ocstyle \
     && git clone https://github.com/iconnor/pmd.git /root/pmd \
     && git clone https://github.com/squizlabs/PHP_CodeSniffer.git /root/phpcs \
@@ -49,12 +46,14 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     script/bootstrap && \
     ./gradlew install
 
-ENV BLISS_CLI_VERSION 40
+ENV BLISS_CLI_VERSION 42
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
     && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
+    && mv /root/collector/jshintoptions.json /root/jshintoptions.json \
+    && mv /root/collector/json.js /root/json.js \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
 # Set default encoding
