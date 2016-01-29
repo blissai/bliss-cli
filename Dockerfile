@@ -15,7 +15,7 @@ ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
-    && npm install -g jshint csslint
+    && npm install -g jshint csslint eslint
 
 # Clone phpcs & wpcs & pmd & ocstyle
 RUN cd /root \
@@ -46,7 +46,7 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     script/bootstrap && \
     ./gradlew install
 
-ENV BLISS_CLI_VERSION 42
+ENV BLISS_CLI_VERSION 43
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
@@ -54,6 +54,8 @@ RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/coll
     && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
     && mv /root/collector/jshintoptions.json /root/jshintoptions.json \
     && mv /root/collector/json.js /root/json.js \
+    && mv /root/collector/eslintoptions.json /root/eslintoptions.json \
+    && mv /root/collector/.eslintrc /root/.eslintrc \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
 # Set default encoding
