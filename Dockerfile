@@ -15,7 +15,7 @@ ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 # Install Node.js
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
-    && npm install -g jshint csslint eslint
+    && npm install -g jshint csslint eslint nsp
 
 # Clone phpcs & wpcs & pmd & ocstyle
 RUN cd /root \
