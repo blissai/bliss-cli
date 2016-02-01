@@ -9,10 +9,19 @@ FROM yajo/centos-epel
 RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn && \
     yum clean all
 
+# Install Go 1.5
+RUN cd /tmp && \
+    wget https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf /tmp/go1.5.linux-amd64.tar.gz && \
+    ln -s /usr/local/go/bin/go /usr/local/bin/go && \
+    ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc
+
+ENV PATH $PATH:/usr/local/go/bin
+
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 
-# Install Node.js
+# Install Node.js, CSSlint, ESlint, nsp
 RUN curl --silent --location https://rpm.nodesource.com/setup | bash - \
     && yum install -y nodejs --enablerepo=epel \
     && npm install -g jshint csslint eslint nsp
@@ -45,6 +54,10 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     cd ~/tailor && \
     script/bootstrap && \
     ./gradlew install
+
+# Install gometalinter
+go get github.com/alecthomas/gometalinter
+gometalinter --install --update
 
 ENV BLISS_CLI_VERSION 43
 
