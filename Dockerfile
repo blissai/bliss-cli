@@ -56,8 +56,8 @@ RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     ./gradlew install
 
 # Install gometalinter
-go get github.com/alecthomas/gometalinter
-gometalinter --install --update
+RUN go get github.com/alecthomas/gometalinter
+RUN gometalinter --install --update
 
 ENV BLISS_CLI_VERSION 43
 
