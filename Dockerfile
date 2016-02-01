@@ -6,7 +6,7 @@
 FROM yajo/centos-epel
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl python-pip php  java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn && \
+RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip && \
     yum clean all
 
 # Install Go 1.5
@@ -50,10 +50,7 @@ RUN gem update --system \
 
 # Install Tailor
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
-    cd ~/tailor && \
-    script/bootstrap && \
-    ./gradlew install
+RUN curl -fsSL https://tailor.sh/install.sh | sh
 
 # Install gometalinter
 RUN go get github.com/alecthomas/gometalinter
