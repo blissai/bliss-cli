@@ -3,11 +3,19 @@
 #
 
 # Pull base image.
-FROM yajo/centos-epel
+FROM yajo/centos-epel:bnkycnk4x4ejyh2urkslxmj
 
 # Install dependencies
 RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip && \
     yum clean all
+
+# Install JRuby
+RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
+ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
+
+# Update system gems and install bundler
+RUN gem update --system \
+    && gem install bundler
 
 # Install Go 1.5
 RUN cd /tmp && \
@@ -40,20 +48,11 @@ RUN yum install -y 'perl(Perl::Critic)'
 # Install pip modules
 RUN pip install importlib argparse lizard django prospector parcon ocstyle
 
-# Install JRuby
-RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
-ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
-
-# Update system gems and install bundler
-RUN gem update --system \
-    && gem install bundler
-
 # Install Tailor
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64
 RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
     cd ~/tailor && \
     script/bootstrap && \
-    ./gradlew build && \
     ./gradlew install
 
 # Install gometalinter
