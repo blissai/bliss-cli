@@ -13,8 +13,8 @@ RUN yum install -y git wget gcc-c++ make perl php java-1.8.0-openjdk java-1.8.0-
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
 # Install JRuby
-RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
-ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
+RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.5.0/jruby-bin-9.0.5.0.tar.gz | tar xz -C /opt
+ENV PATH /opt/jruby-9.0.5.0/bin:$PATH
 
 # Update system gems and install bundler
 RUN gem update --system \
