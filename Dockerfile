@@ -3,7 +3,7 @@
 #
 
 # Pull base image.
-FROM yajo/centos-epel:bnkycnk4x4ejyh2urkslxmj
+FROM centos:latest
 
 # Install dependencies
 RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip && \
