@@ -50,7 +50,10 @@ RUN gem update --system \
 
 # Install Tailor
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64
-RUN curl -fsSL https://tailor.sh/install.sh | sh
+RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
+    cd ~/tailor && \
+    script/bootstrap && \
+    ./gradlew install
 
 # Install gometalinter
 RUN go get github.com/alecthomas/gometalinter
