@@ -6,8 +6,11 @@
 FROM centos:latest
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl python-pip php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip epel-release && \
+RUN yum install -y git wget gcc-c++ make perl php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip epel-release && \
     yum clean all
+
+# Install pip
+RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
 # Install JRuby
 RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
