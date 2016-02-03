@@ -25,10 +25,12 @@ RUN cd /tmp && \
     wget https://storage.googleapis.com/golang/go1.5.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf /tmp/go1.5.linux-amd64.tar.gz && \
     ln -s /usr/local/go/bin/go /usr/local/bin/go && \
-    ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc
+    ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc && \
+    mkdir /root/go && \
+    export PATH=$PATH:/usr/local/go/bin && \
+    export GOPATH=/root/go && \
+    export PATH=$PATH:/root/go/bin
 
-ENV PATH $PATH:/usr/local/go/bin
-ENV GOPATH /root
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 
