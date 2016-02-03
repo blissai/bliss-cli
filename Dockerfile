@@ -13,8 +13,8 @@ RUN yum install -y git wget gcc-c++ make perl php java-1.8.0-openjdk java-1.8.0-
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
 # Install JRuby
-RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.5.0/jruby-bin-9.0.5.0.tar.gz | tar xz -C /opt
-ENV PATH /opt/jruby-9.0.5.0/bin:$PATH
+RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
+ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 
 # Update system gems and install bundler
 RUN gem update --system \
@@ -53,10 +53,7 @@ RUN pip install importlib argparse lizard django prospector parcon ocstyle
 
 # Install Tailor
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64
-RUN git clone https://github.com/founderbliss/tailor.git ~/tailor && \
-    cd ~/tailor && \
-    script/bootstrap && \
-    ./gradlew install
+RUN curl -fsSL https://s3.amazonaws.com/bliss-cli-dependencies/tailor-install.sh | sh
 
 # Install gometalinter
 RUN go get github.com/alecthomas/gometalinter
