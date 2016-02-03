@@ -26,10 +26,10 @@ RUN cd /tmp && \
     tar -C /usr/local -xzf /tmp/go1.5.linux-amd64.tar.gz && \
     ln -s /usr/local/go/bin/go /usr/local/bin/go && \
     ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc && \
-    mkdir /root/go && \
-    export PATH=$PATH:/usr/local/go/bin && \
-    export GOPATH=/root/go && \
-    export PATH=$PATH:/root/go/bin
+    mkdir /root/go
+ENV PATH $PATH:/usr/local/go/bin
+ENV GOPATH /root/go
+ENV PATH $PATH:/root/go/bin
 
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
