@@ -28,7 +28,7 @@ RUN cd /tmp && \
     ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc
 
 ENV PATH $PATH:/usr/local/go/bin
-
+ENV GOPATH /root
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
 
