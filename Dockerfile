@@ -66,7 +66,7 @@ ENV BLISS_CLI_VERSION 43
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
-    && bundle install && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
+    && bundle install --without test && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
     && mv /root/collector/jshintoptions.json /root/jshintoptions.json \
     && mv /root/collector/json.js /root/json.js \
     && mv /root/collector/eslintoptions.json /root/eslintoptions.json \
