@@ -17,7 +17,7 @@ RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.
 ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
 
 # Update system gems and install bundler
-RUN gem update --system -v 2.5.1 \
+RUN gem update --system 2.5.1 \
     && gem install bundler
 
 # Install Go 1.5
