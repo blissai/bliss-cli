@@ -27,9 +27,8 @@ RUN cd /tmp && \
     ln -s /usr/local/go/bin/go /usr/local/bin/go && \
     ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc && \
     mkdir /root/go
-ENV PATH $PATH:/usr/local/go/bin
 ENV GOPATH /root/go
-ENV PATH $PATH:/root/go/bin
+ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Set max heap space for java
 ENV JAVA_OPTS '-Xms512m -Xmx2048m'
