@@ -26,7 +26,7 @@ class DockerRunner
     puts 'Building docker image...'
     build_cmd = "docker build -t #{@image_name} ."
     result = []
-    Open3.popen3(build_cmd)do |_stdin, stdout, stderr, wait_thr|
+    Open3.popen3(build_cmd) do |_stdin, stdout, stderr, wait_thr|
       result << stderr.read
       result << stdout.read
       wait_thr.value

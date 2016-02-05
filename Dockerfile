@@ -76,6 +76,7 @@ RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/coll
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
+ENV HEAPSIZE 3072m
 
 WORKDIR /root
 
