@@ -60,7 +60,7 @@ RUN curl -fsSL https://s3.amazonaws.com/bliss-cli-dependencies/tailor-install.sh
 RUN go get github.com/alecthomas/gometalinter
 RUN gometalinter --install --update
 
-ENV BLISS_CLI_VERSION 45
+ENV BLISS_CLI_VERSION 46
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
