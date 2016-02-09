@@ -60,7 +60,13 @@ RUN curl -fsSL https://s3.amazonaws.com/bliss-cli-dependencies/tailor-install.sh
 RUN go get github.com/alecthomas/gometalinter
 RUN gometalinter --install --update
 
-ENV BLISS_CLI_VERSION 46
+# Set default encoding
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV HEAPSIZE 3072m
+
+ENV BLISS_CLI_VERSION 47
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
@@ -71,12 +77,6 @@ RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/coll
     && mv /root/collector/eslintoptions.json /root/eslintoptions.json \
     && mv /root/collector/.eslintrc /root/.eslintrc \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
-
-# Set default encoding
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-ENV HEAPSIZE 3072m
 
 WORKDIR /root
 
