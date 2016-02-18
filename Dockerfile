@@ -66,7 +66,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV HEAPSIZE 3072m
 
-ENV BLISS_CLI_VERSION 50
+ENV BLISS_CLI_VERSION 51
 
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
