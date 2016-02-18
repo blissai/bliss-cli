@@ -71,14 +71,10 @@ ENV BLISS_CLI_VERSION 50
 # Get collector tasks and gems
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
-    && bundle install --without test && mv /root/collector/.rubocop.yml /root/.rubocop.yml \
-    && mv /root/collector/jshintoptions.json /root/jshintoptions.json \
-    && mv /root/collector/json.js /root/json.js \
-    && mv /root/collector/eslintoptions.json /root/eslintoptions.json \
-    && mv /root/collector/.eslintrc /root/.eslintrc \
+    && bundle install --without test
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
-WORKDIR /root
+WORKDIR /root/collector
 
 # Define default command.
 CMD ["/bin/bash"]
