@@ -11,9 +11,19 @@ unless Gem.win_platform?
   exit unless system check_cmd
 end
 
+if @args.size == 3
+  @config = {
+    'API_KEY' => @args[0],
+    'ORG_NAME' => @args[1],
+    'TOP_LVL_DIR' => @args[2]
+  }
+else
+  @config = nil
+end
+
 if auto?
   puts 'Running Bliss CLI...'
-  BlissRunner.new.automate
+  BlissRunner.new(@config).automate
 else
   puts 'Usage:'
   puts "bliss\t\t Run the CLI."

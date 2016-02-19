@@ -1,17 +1,21 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
   include Gitbase
-  def initialize
+  def initialize(config = nil)
     # Load configuration File if it exists
-    @conf_dir = File.expand_path('~/.bliss')
-    @conf_path = "#{@conf_dir}/config.yml"
-    if File.exist? @conf_path
-      @config = YAML.load_file(@conf_path)
+    if config.nil?
+      @conf_dir = File.expand_path('~/.bliss')
+      @conf_path = "#{@conf_dir}/config.yml"
+      if File.exist? @conf_path
+        @config = YAML.load_file(@conf_path)
+      else
+        @config = {}
+      end
+      get_config
     else
-      @config = {}
+      @config = config
+      set_host
     end
-
-    get_config
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
     update_repositories
@@ -101,7 +105,7 @@ class BlissRunner
   def update_repositories
     puts 'Updating repositories to latest commit...'
     repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
-            .select { |fn| File.directory? fn }
+    .select { |fn| File.directory? fn }
     repos.each do |dir|
       cmd = "cd #{dir} && git pull"
       puts "\tPulling repository at #{dir}...".blue
