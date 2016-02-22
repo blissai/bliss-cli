@@ -3,7 +3,7 @@ class DockerCmd < DockerRunner
     sort_args(args)
     @image_name = image_name
     @cmd = cmd
-    # pull_image
+    pull_image
   end
 
   def docker_start_cmd
