@@ -1,28 +1,23 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
   include Gitbase
-  def initialize(config = nil)
+  def initialize
     # Load configuration File if it exists
-    if config.nil?
-      @conf_dir = File.expand_path('~/.bliss')
-      @conf_path = "#{@conf_dir}/config.yml"
-      if File.exist? @conf_path
-        @config = YAML.load_file(@conf_path)
-      else
-        @config = {}
-      end
-      get_config
+    @conf_dir = File.expand_path('~/.bliss')
+    @conf_path = "#{@conf_dir}/config.yml"
+    if File.exist? @conf_path
+      @config = YAML.load_file(@conf_path)
     else
-      @config = config
-      set_host
+      @config = {}
     end
+    configure_bliss
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
                                       'blissai/collector')
     update_repositories
   end
 
   # Initialize state from config file or user input
-  def get_config
+  def configure_bliss
     puts 'Configuring collector...'
     get_or_save_arg('What\'s your Bliss API Key?', 'API_KEY')
     get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
