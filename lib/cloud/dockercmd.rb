@@ -22,8 +22,8 @@ class DockerCmd < DockerRunner
     @args = []
     args.each do |a|
       k, v = a.split('=')
-      if mountable.key? k
-        @files_to_mount[v] = mountable[k]
+      if mountable?(k)
+        @files_to_mount[v] = mounts[k]
       else
         @args.push(a)
       end
@@ -31,11 +31,15 @@ class DockerCmd < DockerRunner
   end
 
   # Mountable files
-  def mountable
+  def mounts
     {
       'dir' => '/repository',
       'linter_config_path' => '/linter.yml',
       'output_file' => '/result.txt'
     }
+  end
+
+  def mountable?(k)
+    mounts.key?(k)
   end
 end

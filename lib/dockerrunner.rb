@@ -9,8 +9,10 @@ class DockerRunner
   end
 
   def run
-    system docker_start_cmd
-    remove_stopped
+    command = docker_start_cmd
+    system command
+    # Removed stopped containers unless rm flag is set in docker command
+    remove_stopped unless command.include?(' --rm ')
   end
 
   def docker_start_cmd
