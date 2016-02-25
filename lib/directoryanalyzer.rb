@@ -18,4 +18,14 @@ class DirectoryAnalyzer
     warning += 'Please specify a sub directory to run over first (e.g. the root directory for say a Rails/NodeJS or Java project within this repository).'
     warning
   end
+
+  def total_lines
+    cmd = "find . -type f \( #{supported_files} \) -exec cat -- {} + | wc -l"
+    cmd
+  end
+
+  def supported_files
+    langs = ['sh', 'rb', 'py', 'go', 'm', 'mm', 'h', 'cpp', 'css', 'js', 'class', 'java', 'php', 'bat', 'ps1', 'swift', 'f', 'pm', 'pl']
+    '-name "' + langs.join('" -o -name "*.') + '"'
+  end
 end
