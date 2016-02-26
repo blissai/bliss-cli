@@ -12,7 +12,7 @@ class DockerCmd < DockerRunner
     @files_to_mount.each do |k, v|
       mount_cmd += " -v #{k}:#{v}"
     end
-    collector_cmds = "jruby /root/collector/bin/#{@cmd} #{@args.join(' ')}"
+    collector_cmds = "ruby /root/collector/bin/#{@cmd} #{@args.join(' ')}"
     "#{docker_cmd} #{mount_cmd} --rm -t #{@image_name} #{collector_cmds}"
   end
 

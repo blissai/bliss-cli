@@ -6,19 +6,22 @@
 FROM centos:latest
 
 # Install dependencies
-RUN yum install -y git wget gcc-c++ make perl php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip epel-release && \
+RUN yum install -y git bzip2 which wget gcc-c++ make perl php java-1.8.0-openjdk java-1.8.0-openjdk-devel git-svn unzip epel-release python-devel readline-devel libffi-devel openssl-devel automake libtool bison && \
     yum clean all
 
 # Install pip
 RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
-# Install JRuby
-RUN curl https://s3.amazonaws.com/jruby.org/downloads/9.0.3.0/jruby-bin-9.0.3.0.tar.gz | tar xz -C /opt
-ENV PATH /opt/jruby-9.0.3.0/bin:$PATH
+# Install ruby 2.2.3
+RUN cd /tmp && \
+    wget https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.bz2 && \
+    tar -xvjf /tmp/ruby-2.2.3.tar.bz2 && \
+    cd /tmp/ruby-2.2.3 && \
+    ./configure && \
+    make && \
+    make install
 
-# Update system gems and install bundler
-RUN gem update --system 2.5.1 \
-    && gem install bundler
+RUN gem install bundler
 
 # Install Go 1.5
 RUN cd /tmp && \
@@ -26,7 +29,7 @@ RUN cd /tmp && \
     tar -C /usr/local -xzf /tmp/go1.5.linux-amd64.tar.gz && \
     ln -s /usr/local/go/bin/go /usr/local/bin/go && \
     ln -s /usr/local/go/bin/godoc /usr/local/bin/godoc && \
-    mkdir /root/go
+        mkdir /root/go
 ENV GOPATH /root/go
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin
 
@@ -72,7 +75,7 @@ ENV BLISS_CLI_VERSION 67
 # RUN git clone -b cloud https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
-    && bundle install --without test \
+    && /bin/bash -l -c "bundle install --without test" \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
 WORKDIR /root/collector
