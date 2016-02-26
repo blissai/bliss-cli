@@ -75,7 +75,7 @@ ENV BLISS_CLI_VERSION 68
 # RUN git clone -b cloud https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
 RUN git clone https://github.com/founderbliss/enterprise-analyzer.git /root/collector \
     && cd /root/collector \
-    && /bin/bash -l -c "bundle install --without test" \
+    && bundle install --without test \
     && mkdir /root/bliss && mv /root/collector/.prospector.yml /root/bliss/.prospector.yml
 
 WORKDIR /root/collector
