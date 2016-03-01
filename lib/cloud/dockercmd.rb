@@ -7,7 +7,7 @@ class DockerCmd < DockerRunner
   end
 
   def docker_start_cmd
-    docker_cmd = 'docker run -i'
+    docker_cmd = 'docker run'
     mount_cmd = ''
     @files_to_mount.each do |k, v|
       mount_cmd += " -v #{k}:#{v}"
