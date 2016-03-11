@@ -9,10 +9,11 @@ unless Gem.win_platform?
   check_cmd = File.read("#{File.dirname($0)}/scripts/dockercheck.sh")
   exit unless system check_cmd
 end
-require 'pry'
 if @args.nil?
   puts 'Running Bliss CLI...'
   BlissRunner.new.automate
+elsif @args[0] == 'init'
+  BlissInitializer.new.execute
 else
   task = @args[0]
   if task.eql?('stats') || task.eql?('lint')
