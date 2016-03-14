@@ -36,7 +36,7 @@ class BlissRunner
   def update_repositories
     puts 'Updating repositories to latest commit...'
     repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
-    .select { |fn| File.directory? fn }
+            .select { |fn| File.directory?(fn) && git_dir?(fn) }
     repos.each do |dir|
       cmd = "cd #{dir} && git pull"
       puts "\tPulling repository at #{dir}...".blue
