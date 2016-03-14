@@ -1,18 +1,12 @@
 # A class to handle config and instantiation of tasks
 class BlissRunner
+  include Configuration
   include Gitbase
   def initialize
     # Load configuration File if it exists
-    @conf_dir = File.expand_path('~/.bliss')
-    @conf_path = "#{@conf_dir}/config.yml"
-    if File.exist? @conf_path
-      @config = YAML.load_file(@conf_path)
-    else
-      @config = {}
-    end
+    load_configuration
     configure_bliss
-    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'],
-                                      'blissai/collector')
+    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'])
     update_repositories
   end
 
@@ -37,15 +31,8 @@ class BlissRunner
     end
   end
 
-  def configured?
-    !@config['TOP_LVL_DIR'].empty? && !@config['ORG_NAME'].empty? && !@config['API_KEY'].empty? && !@config['BLISS_HOST'].empty?
-  end
-
-  def set_host
-    @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
-  end
-
   def git_dir?(dir)
+    return false unless File.directory?("#{dir}/.git")
     cmd = "cd #{dir} && git rev-parse"
     if Gem.win_platform?
       cmd = "#{cmd} 2> nul"

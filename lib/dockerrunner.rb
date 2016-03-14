@@ -1,11 +1,11 @@
 # Class to encapsulate docker commands
 class DockerRunner
-  def initialize(env_vars, repos_dir, image_name)
+  def initialize(env_vars, repos_dir, image_name = 'blissai/collector', pull_latest = true)
     @env_vars = env_vars
     @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = repos_dir
     @image_name = image_name
-    pull_image
+    pull_image if pull_latest
   end
 
   def run

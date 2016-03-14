@@ -1,5 +1,5 @@
-class DockerCmd < DockerRunner
-  def initialize(args, image_name, cmd)
+class DockerLocal < DockerRunner
+  def initialize(args, cmd, image_name = 'blissai/collector')
     sort_args(args)
     @image_name = image_name
     @cmd = cmd
