@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require_relative '../spec_helper'
 RSpec.describe Configuration do
   before(:all) do
     @config_dir = File.expand_path('~/.bliss')
@@ -23,6 +23,23 @@ RSpec.describe Configuration do
       expect(config['API_KEY']).to eq('TESTAPIKEY')
       expect(config['TOP_LVL_DIR']).to eq('/home/testtoplvlpath')
       expect(config['ORG_NAME']).to eq('testorgname')
+    end
+
+    it 'formats args properly' do
+      instance = including_class.new
+      instance.load_configuration
+      expect(instance.format_arg('ORG_NAME', 'org name')).to eq('org-name')
+    end
+
+    it 'should check validity of directory' do
+      instance = including_class.new
+      instance.load_configuration
+
+      result = instance.is_valid_arg('TOP_LVL_DIR', '/laksdjf/notreal')
+      expect(result[:valid]).to eq(false)
+
+      result = instance.is_valid_arg('TOP_LVL_DIR', Dir.pwd)
+      expect(result[:valid]).to eq(false)
     end
   end
 end

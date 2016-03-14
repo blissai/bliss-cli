@@ -29,4 +29,15 @@ module Gitbase
       break
     end
   end
+
+  def git_dir?(dir)
+    return false unless File.directory?("#{dir}/.git")
+    cmd = "cd #{dir} && git rev-parse"
+    if Gem.win_platform?
+      cmd = "#{cmd} 2> nul"
+    else
+      cmd = "#{cmd} > /dev/null 2>&1"
+    end
+    system(cmd)
+  end
 end
