@@ -1,9 +1,14 @@
 class BlissInitializer
+  include Gitbase
   include Configuration
   attr_reader :directory
 
   def initialize(git_dir = nil)
     @directory = git_dir.nil? ? Dir.pwd : git_dir
+    unless git_dir? @directory
+      puts 'Error: This is not a valid git directory.'.red
+      exit
+    end
     @analyzer = ProjectAnalyzer.new(@directory)
     load_configuration
     configure_bliss
