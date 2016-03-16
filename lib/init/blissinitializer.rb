@@ -12,9 +12,10 @@ class BlissInitializer
     load_configuration
     configure_bliss
     @analyzer = ProjectAnalyzer.new(@directory, 500_000)
+    @docker_runner = DockerInitializer.new(@directory, @config)
     @subdir = @analyzer.prompt_for_subdir
     @args = @subdir.nil? ? [] : ["subdir=#{@subdir}"]
-    @docker_runner = DockerInitializer.new(@directory, @config, @args)
+    @docker_runner.args = @args
     update_repository
   end
 

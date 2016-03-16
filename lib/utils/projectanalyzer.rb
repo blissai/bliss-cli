@@ -2,14 +2,14 @@ class ProjectAnalyzer
   attr_reader :directory
   attr_reader :total_lines
 
-  def initialize(git_dir, max_lines = 750000)
+  def initialize(git_dir, max_lines = 750_000)
     @max_lines = max_lines
     update_directory(git_dir)
     calculate_total_lines
   end
 
-  def update_directory(git_dir)
-    @directory = git_dir
+  def update_directory(new_dir)
+    @directory = new_dir
     calculate_total_lines
   end
 

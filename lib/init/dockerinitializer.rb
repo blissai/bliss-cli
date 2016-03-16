@@ -1,8 +1,9 @@
 class DockerInitializer < DockerRunner
-  def initialize(git_dir, env_vars, args, image_name = 'blissai/collector', pull_latest = true)
+  attr_accessor :args
+  def initialize(git_dir, env_vars, image_name = 'blissai/collector', pull_latest = true)
     @git_dir = git_dir
     @env_vars = env_vars
-    @args = args
+    @args = []
     @image_name = image_name
     @cmd = 'bliss-init'
     pull_image if pull_latest
