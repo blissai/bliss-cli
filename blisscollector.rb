@@ -23,6 +23,7 @@ else
   else
     puts 'Usage:'
     puts "bliss\t\t Run the CLI."
+    puts "bliss init \t\t Send preliminary repository data to Bliss."
     puts "bliss help\t\t Display this help message."
   end
 end
