@@ -39,18 +39,18 @@ class BlissInitializer
     puts 'This repository appears to consist of multiple projects. ' \
     'Please choose a subdirectory to analyze (e.g. a node project, a rails project) or type exit.'
     puts 'Possible choices:'
-    Dir.glob('*/').each do |sd|
-      puts sd.split('/').first
+    maindir = @directory if maindir.nil?
+    Dir.glob("#{maindir}/*/").each do |sd|
+      puts sd.gsub("#{maindir}/", '')
     end
     subdir = $stdin.gets.chomp
     subdir = subdir.strip
     exit if subdir == 'exit'
-    maindir = @directory if maindir.nil?
-    full_subdir_path = File.join(@directory, subdir)
+    full_subdir_path = File.join(maindir, subdir)
     if File.directory?(full_subdir_path)
       @analyzer.update_directory(full_subdir_path)
-      return propt_for_subdirectory(full_subdir_path) if @analyzer.too_big?
-      return subdir.gsub("#{@directory}/", '')
+      return prompt_for_subdir(full_subdir_path) if @analyzer.too_big?
+      return full_subdir_path.gsub("#{@directory}/", '')
     else
       puts 'Not a valid subdirectory.'.red
       prompt_for_subdir(maindir)
