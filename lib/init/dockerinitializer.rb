@@ -5,6 +5,7 @@ class DockerInitializer < DockerRunner
     @args = args
     @image_name = image_name
     @cmd = 'bliss-init'
+    pull_image
   end
 
   def docker_start_cmd

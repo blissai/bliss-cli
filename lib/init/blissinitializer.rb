@@ -25,6 +25,7 @@ class BlissInitializer
   end
 
   def execute
+    # puts @docker_runner.docker_start_cmd
     @docker_runner.run
   end
 
@@ -32,7 +33,7 @@ class BlissInitializer
     return nil unless @analyzer.too_big?
     puts 'This repository appears to consist of multiple projects. ' \
     'Please choose a subdirectory to analyze (e.g. a node project, a rails project) or type exit.'
-    subdir = gets.chomp
+    subdir = $stdin.gets.chomp
     subdir = subdir.strip
     exit if subdir == 'exit'
     if File.directory? subdir
