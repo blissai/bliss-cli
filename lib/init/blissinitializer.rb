@@ -9,7 +9,7 @@ class BlissInitializer
       puts 'Error: This is not a valid git directory.'.red
       exit
     end
-    @analyzer = ProjectAnalyzer.new(@directory)
+    @analyzer = ProjectAnalyzer.new(@directory, 500_000)
     load_configuration
     configure_bliss
     @subdir = prompt_for_subdir
@@ -34,17 +34,26 @@ class BlissInitializer
     @docker_runner.run
   end
 
-  def prompt_for_subdir
+  def prompt_for_subdir(maindir = nil)
     return nil unless @analyzer.too_big?
     puts 'This repository appears to consist of multiple projects. ' \
     'Please choose a subdirectory to analyze (e.g. a node project, a rails project) or type exit.'
+    puts 'Possible choices:'
+    Dir.glob('*/').each do |sd|
+      puts sd.split('/').first
+    end
     subdir = $stdin.gets.chomp
     subdir = subdir.strip
     exit if subdir == 'exit'
-    if File.directory? subdir
-      return subdir
+    maindir = @directory if maindir.nil?
+    full_subdir_path = File.join(@directory, subdir)
+    if File.directory?(full_subdir_path)
+      @analyzer.update_directory(full_subdir_path)
+      return propt_for_subdirectory(full_subdir_path) if @analyzer.too_big?
+      return subdir.gsub("#{@directory}/", '')
     else
-      prompt_for_subdir
+      puts 'Not a valid subdirectory.'.red
+      prompt_for_subdir(maindir)
     end
   end
 
