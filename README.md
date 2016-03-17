@@ -145,17 +145,19 @@ To run the Bliss CLI from a manual installation, navigate (cd) to the git direct
 ruby blisscollector.rb
 `````
 
+#### Initial Preview ####
+It is recommended that you run our preview step before using the complete tool. This will give you an idea of what kind of data Bliss collects, and will give you a preview dashboard.
+To do this, navigate to a repository and run:
+`````
+bliss init
+`````
+This command will run the tool over your most recent commit to give you an idea of how we break down technical debt in your repository.
+
 #### What the tool does ####
 The CLI will run three different tasks. These are:
 * Perform a git log on your repositories to get a list of commits.
 * Analyze each commit for stats such as lines of code, test coverage etc.
 * Run various linting tools over each commit in order to track technical debt over time.
-
-<!-- #### Windows ####
-To run the CLI, navigate (cd) to the Collector directory in a shell, and type:
-`````
-jruby blisscollector.rb
-````` -->
 
 #### Success/Failure ####
 If everything ran smoothly, you can visit your <a href="https://app.blissai.com/projects" target="_blank">Dashboard here</a>.
