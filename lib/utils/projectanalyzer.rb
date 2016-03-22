@@ -14,6 +14,7 @@ class ProjectAnalyzer
   end
 
   def too_big?
+    return false if Gem.win_platform?
     @total_lines > @max_lines
   end
 
@@ -37,6 +38,7 @@ class ProjectAnalyzer
   private
 
   def calculate_total_lines
+    return if Gem.win_platform?
     cmd = "find #{@directory} -type f \\( #{supported_files} \\) -exec cat -- {} + | wc -l"
     @total_lines = `#{cmd}`.strip.to_i
   end
