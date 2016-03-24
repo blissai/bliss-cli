@@ -48,7 +48,7 @@ module Configuration
       puts "Loading #{env_name} from ~/.bliss/config.yml...  #{@config[env_name]}".blue
     else
       puts message.blue
-      arg = gets.chomp
+      arg = $stdin.gets.chomp
       arg = File.expand_path(arg) if env_name.eql? 'TOP_LVL_DIR'
       valid = is_valid_arg(env_name, arg)
       if !valid[:valid]
