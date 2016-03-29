@@ -3,7 +3,7 @@ class DockerRunner
   def initialize(env_vars, repos_dir, image_name = 'blissai/collector', pull_latest = true)
     @env_vars = env_vars
     @env_vars['TOP_LVL_DIR'] = '/repositories'
-    @repos_dir = format_path(@repos_dir)
+    @repos_dir = format_path(repos_dir)
     @image_name = image_name
     pull_image if pull_latest
   end
@@ -65,8 +65,8 @@ class DockerRunner
   end
 
   def format_path(path)
-    return path unless Gem.win_platform?
     return nil if path.nil?
+    return path unless Gem.win_platform?
     drive = path[/^[a-zA-Z]*:/]
     drive = drive.downcase.sub(':', '')
     path.sub(/^[a-zA-Z]*:/, "/#{drive}")
