@@ -38,15 +38,12 @@ class ProjectAnalyzer
   private
 
   def calculate_total_lines
-    return if Gem.win_platform?
-    cmd = "find #{@directory} -type f \\( #{supported_files} \\) -exec cat -- {} + | wc -l"
-    @total_lines = `#{cmd}`.strip.to_i
-  end
-
-  # Supported extensions to search for
-  def supported_files
-    langs = %w(sh rb py go m mm h cpp css js class java php bat ps1 swift f pm pl)
-    '-name "' + langs.join('" -o -name "*.') + '"'
+    if @docker_loc
+      @docker_loc.directory = @directory
+    else
+      @docker_loc = DockerLoc.new(@directory)
+    end
+    @total_lines = @docker_loc.run
   end
 
   def choose_dir(maindir)

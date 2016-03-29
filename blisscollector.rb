@@ -5,7 +5,11 @@ puts 'Initializing...'
 @args = ARGV.size > 0 ? ARGV : nil
 
 # Check that docker is running properly
-unless Gem.win_platform?
+if Gem.win_platform?
+  unless system 'docker ps'
+    exit 'Docker is not running or accessible. Please ensure Docker is set up correctly.'
+  end
+else
   check_cmd = File.read("#{File.dirname($0)}/scripts/dockercheck.sh")
   exit unless system check_cmd
 end
