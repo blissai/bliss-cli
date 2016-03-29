@@ -11,7 +11,6 @@ RSpec.describe ProjectAnalyzer do
   end
 
   it 'should not be too big' do
-    # TODO Don't hardcode a value, 100m is fine for now
     @pa = ProjectAnalyzer.new(@testdir, 100_000_000)
     expect(@pa.too_big?).to eq(false)
   end
