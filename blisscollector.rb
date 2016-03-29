@@ -7,7 +7,7 @@ puts 'Initializing...'
 # Check that docker is running properly
 if Gem.win_platform?
   unless system 'docker ps'
-    exit 'Docker is not running or accessible. Please ensure Docker is set up correctly.'
+    abort 'Docker is not running or accessible. Please ensure Docker is set up correctly.'
   end
 else
   check_cmd = File.read("#{File.dirname($0)}/scripts/dockercheck.sh")
