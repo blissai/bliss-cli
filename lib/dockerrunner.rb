@@ -66,6 +66,7 @@ class DockerRunner
 
   def format_path(path)
     return path unless Gem.win_platform?
+    return nil if path.nil?
     drive = path[/^[a-zA-Z]*:/]
     drive = drive.downcase.sub(':', '')
     path.sub(/^[a-zA-Z]*:/, "/#{drive}")
