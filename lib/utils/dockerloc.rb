@@ -2,7 +2,7 @@ class DockerLoc < DockerRunner
   attr_accessor :directory
 
   def initialize(directory)
-    @directory = directory
+    @directory = format_path(directory)
   end
 
   def docker_start_cmd
@@ -21,6 +21,7 @@ class DockerLoc < DockerRunner
     Open3.popen3(docker_start_cmd) do |_stdin, stdout, stderr, wait_thr|
       result << stdout.read
       result << stderr.read
+      wait_thr.value
     end
     result = result.join('')
     return result.strip.to_i if result !~ /Cannot connect to the Docker daemon/

@@ -23,7 +23,7 @@ class DockerLocal < DockerRunner
     args.each do |a|
       k, v = a.split('=')
       if mountable?(k)
-        @files_to_mount[v] = mounts[k]
+        @files_to_mount[format_path(v)] = mounts[k]
       else
         @args.push(a)
       end

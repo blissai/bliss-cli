@@ -3,7 +3,7 @@ class DockerRunner
   def initialize(env_vars, repos_dir, image_name = 'blissai/collector', pull_latest = true)
     @env_vars = env_vars
     @env_vars['TOP_LVL_DIR'] = '/repositories'
-    @repos_dir = repos_dir
+    @repos_dir = format_windows_path(@repos_dir)
     @image_name = image_name
     pull_image if pull_latest
   end
@@ -62,5 +62,12 @@ class DockerRunner
     stopped_containers.each do |c|
       puts `docker rm #{c}`
     end
+  end
+
+  def format_path(path)
+    return path unless Gem.win_platform?
+    drive = path[/^[a-zA-Z]*:/]
+    drive = drive.downcase.sub(':', '')
+    path.sub(/^[a-zA-Z]*:/, "/#{drive}")
   end
 end
