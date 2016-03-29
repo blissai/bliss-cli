@@ -8,7 +8,7 @@ RSpec.describe DockerInitializer do
 
     testargs = ['blah=blah', 'blahblah=blahblah']
     @testdir = '/test/mytestrepodir'
-    @docker_runner = DockerInitializer.new(@testdir, env_vars, testargs, 'test/image', false)
+    @docker_runner = DockerInitializer.new(@testdir, env_vars, 'test/image', false)
   end
 
   it 'should have the correct command' do
