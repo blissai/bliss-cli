@@ -20,7 +20,7 @@ elsif @args[0] == 'init'
   BlissInitializer.new.execute
 else
   task = @args[0]
-  if task.eql?('stats') || task.eql?('lint')
+  if task.eql?('stats') || task.eql?('lint') || task.eql?('log')
     puts 'Running locally, just use bliss with no arguments if you are an enterprise customer...'
     @args.shift
     LocalRunner.new(@args, "bliss-#{task}").execute
