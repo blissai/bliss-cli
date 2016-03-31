@@ -108,7 +108,8 @@ sudo yum install bliss
 #### Windows ####
 Windows users can simply download our executable file, at:
 https://s3.amazonaws.com/bliss-cli-win/bliss.exe
-You will still need to ensure that the Git and Docker dependencies are met.
+You will still need to ensure that the Git and Docker dependencies are met and that the executable is accessible in your PATH.
+You can find instructions on setting your PATH <a href="http://www.computerhope.com/issues/ch000549.htm" target="_blank">here</a>.
 
 #### Manual ####
 You can also simply clone this repository and run the CLI from the git directory.
