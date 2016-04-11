@@ -7,15 +7,23 @@ This tool supports the following languages at the moment:
 * Python
 * Javascript
 * CSS
+* Sass
+* Stylus
 * Perl
 * PHP
 * Java
+* Scala
 * Objective-C
+* Swift
 * C++
+* C-Sharp/.Net
+* Elixir
 
 You can login to your Bliss Dashboard at the link below:
 
 <a href="https://app.blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
+
+The project analysis is platform independent. For example .NET project can be analyzed on a Unix machine.
 
 Information Required
 --------
@@ -168,7 +176,7 @@ Configuration
 ------------
 
 The first time the CLI is run, you will be prompted for the information set out in the ['Information Required'](#information-required) section above.
-This information will be stored in a YAML file, $USER/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
+This information will be stored in a YAML file, $HOME/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
 
 <!-- The commands available through the CLI tool are:
 *  Collector (C) - this command will collect metadata about your repositories and post them to Bliss
