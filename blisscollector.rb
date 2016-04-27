@@ -6,25 +6,35 @@ puts 'Initializing...'
 
 # Check that docker is running properly
 if Gem.win_platform?
-  unless system 'docker ps'
-    abort 'Docker is not running or accessible. Please ensure Docker is set up correctly.'
-  end
+  abort 'Docker is not running or accessible. Please ensure Docker is set up correctly.' unless system 'docker ps'
 else
-  script_path = "#{File.dirname(File.expand_path(__FILE__))}/scripts/dockercheck.sh"
-  check_cmd = File.read(script_path)
+  script = "#{File.dirname(File.expand_path(__FILE__))}/scripts/dockercheck.sh"
+  check_cmd = File.read(script)
   exit unless system check_cmd
 end
-if @args.nil?
-  puts 'Running Bliss CLI...'
-  BlissRunner.new.automate
-elsif @args[0] == 'init'
-  BlissInitializer.new.execute
-else
+
+abort 'Requires at least 1 argument. Use \'bliss help\' for more info.' if @args.nil?
+
+if @args[0] == 'stats' || @args[0] == 'lint'
   task = @args[0]
   if task.eql?('stats') || task.eql?('lint')
     puts 'Running locally, just use bliss with no arguments if you are an enterprise customer...'
     @args.shift
     LocalRunner.new(@args, "bliss-#{task}").execute
+  end
+elsif @args[0] == 'init'
+  BlissInitializer.new.execute
+else
+  br = BlissRunner.new
+  if @args[0] == 'run'
+    puts 'Running Bliss CLI...'
+    br.automate
+  elsif @args[0] == 'start'
+    br.start
+  elsif @args[0] == 'stop'
+    br.stop
+  elsif @args[0] == 'status'
+    puts br.status
   else
     puts 'Usage:'
     puts "bliss\t\t Run the CLI."

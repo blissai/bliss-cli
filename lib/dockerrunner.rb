@@ -5,11 +5,12 @@ class DockerRunner
     @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = format_path(repos_dir)
     @image_name = image_name
+    @daemonize = false
     pull_image if pull_latest
   end
 
-  def run
-    command = docker_start_cmd
+  def run(daemonfile = nil)
+    command = docker_start_cmd(daemonfile)
     puts 'Running docker command...'
     system command
     puts 'Docker finished.'
@@ -17,8 +18,9 @@ class DockerRunner
     remove_stopped unless command.include?(' --rm ')
   end
 
-  def docker_start_cmd
+  def docker_start_cmd(daemonfile = nil)
     docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
+    docker_cmd += " -v #{daemonfile}:/pstatus -e daemonized=true" if daemonfile
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
