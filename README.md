@@ -139,19 +139,19 @@ sudo service docker start
 #### Homebrew, APT or Yum ####
 If you installed Bliss CLI with Homebrew, APT or YUM, you can run the tool using:
 ``````
-bliss run
+bliss
 ``````
 
 #### Windows ####
 Windows users can run the aforementioned executable, by navigating to the directory in powershell and typing:
 ``````
-.\bliss.exe run
+.\bliss.exe
 ``````
 
 #### Manual ####
 To run the Bliss CLI from a manual installation, navigate (cd) to the git directory in a shell, and type:
 `````
-ruby blisscollector.rb run
+ruby blisscollector.rb
 `````
 
 #### Initial Preview ####
