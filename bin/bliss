@@ -1,2 +1,2 @@
-##!/bin/bash
-/opt/bliss/bin/ruby /opt/bliss/blisscollector.rb "$@"
+#!/opt/bliss/bin/ruby
+require_relative '../blisscollector.rb'
