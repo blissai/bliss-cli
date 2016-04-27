@@ -1,2 +1,4 @@
 #!/opt/bliss/bin/ruby
-require_relative '../blisscollector.rb'
+with_argv(*ARGV) do
+  require_relative '../blisscollector.rb'
+end
