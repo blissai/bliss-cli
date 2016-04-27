@@ -10,7 +10,7 @@ if Gem.win_platform?
     abort 'Docker is not running or accessible. Please ensure Docker is set up correctly.'
   end
 else
-  script_path = "#{File.dirname(File.expand_path(FILE))}/scripts/dockercheck.sh"
+  script_path = "#{File.dirname(File.expand_path(__FILE__))}/scripts/dockercheck.sh"
   check_cmd = File.read(script_path)
   exit unless system check_cmd
 end
