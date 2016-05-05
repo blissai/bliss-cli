@@ -7,11 +7,7 @@ class BlissRunner
     # Load configuration File if it exists
     load_configuration
     configure_bliss
-    if ENV['DOCKER_BUILD_SERVER']
-      @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'], 'blissai/testimage')
-    else
-      @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'])
-    end
+    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'])
     update_repositories
   end
 

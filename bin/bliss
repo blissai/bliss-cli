@@ -1,15 +1,2 @@
-#!/opt/bliss/bin/ruby
-
-def with_argv(*args)
-  backup = ARGV.dup
-  begin
-    ARGV.replace(args)
-    yield
-  ensure
-    ARGV.replace(backup)
-  end
-end
-
-with_argv(*ARGV) do
-  require_relative '../blisscollector.rb'
-end
+#!/bin/bash
+/opt/bliss/bin/ruby /opt/bliss/blisscollector.rb "$@"
