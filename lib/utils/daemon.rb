@@ -35,8 +35,8 @@ module Daemon
 
   # Stop forked process
   def stop
-    abort 'Not running...' if status.eql?(STOPPED)
-    abort 'Already shutting down...' if status.eql?(SHUTTING_DOWN)
+    abort 'Not running...' if status.include?(STOPPED)
+    abort 'Already shutting down...' if status.include?(SHUTTING_DOWN)
     write_status(SHUTTING_DOWN)
   end
 
@@ -50,7 +50,7 @@ module Daemon
   end
 
   def daemonize
-    abort "Already running: pid #{read_pid}" if status.eql?(RUNNING)
+    abort "Already running: pid #{read_pid}" if status.include?(RUNNING)
     puts 'Starting bliss daemon...'
     pid = fork do
       loop do

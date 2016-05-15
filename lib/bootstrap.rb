@@ -1,9 +1,11 @@
 # General purpose loader for require_relatived libraries
+$VERSION = '1.0.42'
 require 'rubygems'
 require 'open3'
 require 'yaml'
 require 'logger'
 require 'fileutils'
+require_relative 'utils/cmd'
 require_relative 'utils/colorize'
 require_relative 'utils/gitbase'
 require_relative 'dockerrunner'

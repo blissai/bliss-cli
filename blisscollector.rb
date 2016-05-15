@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << 'lib'
 require_relative 'lib/bootstrap'
-puts 'Initializing...'
+include Cmd
 @args = ARGV.size > 0 ? ARGV : nil
-
+if @args
+  help(@args[0])
+  version(@args[0])
+end
+puts 'Initializing...'
 # Check that docker is running properly
 if Gem.win_platform?
   abort 'Docker is not running or accessible. Please ensure Docker is set up correctly.' unless system 'docker ps'
@@ -37,7 +41,7 @@ else
     puts br.status
   else
     puts 'Usage:'
-    puts "bliss\t\t Run the CLI."
+    puts "bliss\t\t\t Run the CLI."
     puts "bliss init \t\t Send preliminary repository data to Bliss."
     puts "bliss help\t\t Display this help message."
   end
