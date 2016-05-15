@@ -9,8 +9,8 @@ module Cmd
     end
   end
 
-  def version(arg)
-    if arg.eql?('version') || arg.eql?('-v') || arg.eql?('--version')
+  def version(arg, override = false)
+    if arg.eql?('version') || arg.eql?('-v') || arg.eql?('--version') || override
       puts $VERSION
       exit
     end
