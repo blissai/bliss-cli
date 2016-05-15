@@ -3,10 +3,9 @@ $LOAD_PATH << 'lib'
 require_relative 'lib/bootstrap'
 include Cmd
 @args = ARGV.size > 0 ? ARGV : nil
-if @args
-  help(@args[0])
-  version(@args[0])
-end
+abort 'Requires at least 1 argument. Use \'bliss help\' for more info.' if @args.nil?
+help(@args[0])
+version(@args[0])
 puts 'Initializing...'
 # Check that docker is running properly
 if Gem.win_platform?
@@ -16,8 +15,6 @@ else
   check_cmd = File.read(script)
   exit unless system check_cmd
 end
-
-abort 'Requires at least 1 argument. Use \'bliss help\' for more info.' if @args.nil?
 
 if @args[0] == 'stats' || @args[0] == 'lint'
   task = @args[0]
