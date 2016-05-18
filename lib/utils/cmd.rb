@@ -2,7 +2,7 @@ module Cmd
   def help(arg)
     if arg.eql?('help') || arg.eql?('--help')
       puts 'Usage:'
-      puts "bliss\t\t\t Run the CLI."
+      puts "bliss run \t\t Run the CLI."
       puts "bliss init \t\t Send preliminary repository data to Bliss."
       puts "bliss help\t\t Display this help message."
       exit
