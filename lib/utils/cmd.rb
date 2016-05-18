@@ -1,6 +1,6 @@
 module Cmd
-  def help(arg, override = false)
-    if arg.eql?('help') || arg.eql?('--help') || override
+  def help(arg)
+    if arg.eql?('help') || arg.eql?('--help') || !valid(arg)
       puts 'Usage:'
       puts "bliss run \t\t Run the CLI."
       puts "bliss init \t\t Send preliminary repository data to Bliss."
@@ -14,5 +14,9 @@ module Cmd
       puts $VERSION
       exit
     end
+  end
+
+  def valid(arg)
+    %w(run init start stop status -v --version --help help stats lint).include?(arg)
   end
 end

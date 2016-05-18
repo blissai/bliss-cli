@@ -2,8 +2,8 @@
 $LOAD_PATH << 'lib'
 require_relative 'lib/bootstrap'
 include Cmd
-@args = ARGV.size > 0 ? ARGV : nil
-abort 'Requires at least 1 argument. Use \'bliss help\' for more info.' if @args.nil?
+abort 'Requires at least 1 argument. Use \'bliss help\' for more info.' if ARGV.empty?
+@args = ARGV
 help(@args[0])
 version(@args[0])
 puts 'Initializing...'
@@ -18,11 +18,9 @@ end
 
 if @args[0] == 'stats' || @args[0] == 'lint'
   task = @args[0]
-  if task.eql?('stats') || task.eql?('lint')
-    puts 'Running locally, just use bliss with no arguments if you are an enterprise customer...'
-    @args.shift
-    LocalRunner.new(@args, "bliss-#{task}").execute
-  end
+  puts 'Running locally, just use bliss with no arguments if you are an enterprise customer...'
+  @args.shift
+  LocalRunner.new(@args, "bliss-#{task}").execute
 elsif @args[0] == 'init'
   BlissInitializer.new.execute
 else
@@ -36,7 +34,5 @@ else
     br.stop
   elsif @args[0] == 'status'
     puts br.status
-  else
-    help(@args[0], true)
   end
 end
