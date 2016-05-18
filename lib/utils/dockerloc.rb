@@ -7,7 +7,7 @@ class DockerLoc < DockerRunner
 
   def docker_start_cmd
     bash_cmd = "find /repository -type f \\( #{supported_files} \\) -exec cat -- {} + | wc -l"
-    "docker run --rm -v #{@directory}:/repository -t blissai/collector #{bash_cmd}"
+    "docker run --rm -v #{@directory}:/repository -t blissai/collector:latest #{bash_cmd}"
   end
 
   def run

@@ -12,5 +12,5 @@ dependencies:
 test:
   pre:
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker pull blissai/collector
-    - mkdir -p ~/docker; docker save blissai/collector > ~/docker/image.tar
+    - docker pull blissai/collector:latest
+    - mkdir -p ~/docker; docker save blissai/collector:latest > ~/docker/image.tar

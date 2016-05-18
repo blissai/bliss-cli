@@ -20,13 +20,11 @@ module Configuration
   end
 
   def format_arg(env, arg)
-    if env.eql? 'ORG_NAME'
-      return arg.strip.gsub(' ', '-')
-    end
-    return arg
+    return arg.strip.tr(' ', '-') if env.eql? 'ORG_NAME'
+    arg
   end
 
-  def is_valid_arg(env, arg)
+  def valid_arg?(env, arg)
     if env.eql? 'TOP_LVL_DIR'
       if !File.directory?(arg)
         m = 'That is not a valid directory. Please enter a directory that contains your git repository folders.'
@@ -40,7 +38,7 @@ module Configuration
   end
 
   # Checks for saved argument in config file, otherwise prompts user
-  def get_or_save_arg(message, env_name)
+  def sync_arg(message, env_name)
     if @config && @config[env_name]
       # Backwards compatibility
       unformatted = @config[env_name]
@@ -50,9 +48,9 @@ module Configuration
       puts message.blue
       arg = $stdin.gets.chomp
       arg = File.expand_path(arg) if env_name.eql? 'TOP_LVL_DIR'
-      valid = is_valid_arg(env_name, arg)
+      valid = valid_arg?(env_name, arg)
       if !valid[:valid]
-        get_or_save_arg(valid[:msg], env_name)
+        sync_arg(valid[:msg], env_name)
       else
         @config[env_name] = format_arg(env_name, arg)
       end

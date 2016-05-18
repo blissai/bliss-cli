@@ -35,10 +35,10 @@ RSpec.describe Configuration do
       instance = including_class.new
       instance.load_configuration
 
-      result = instance.is_valid_arg('TOP_LVL_DIR', '/laksdjf/notreal')
+      result = instance.valid_arg?('TOP_LVL_DIR', '/laksdjf/notreal')
       expect(result[:valid]).to eq(false)
 
-      result = instance.is_valid_arg('TOP_LVL_DIR', Dir.pwd)
+      result = instance.valid_arg?('TOP_LVL_DIR', Dir.pwd)
       expect(result[:valid]).to eq(false)
     end
   end

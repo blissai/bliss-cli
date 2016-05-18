@@ -2,6 +2,7 @@
 class BlissRunner
   include Configuration
   include Gitbase
+  include Daemon
   def initialize
     # Load configuration File if it exists
     load_configuration
@@ -13,9 +14,9 @@ class BlissRunner
   # Initialize state from config file or user input
   def configure_bliss
     puts 'Configuring collector...'
-    get_or_save_arg('What\'s your Bliss API Key?', 'API_KEY')
-    get_or_save_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
-    get_or_save_arg('What is the name of your organization in git?', 'ORG_NAME')
+    sync_arg('What\'s your Bliss API Key?', 'API_KEY')
+    sync_arg('Which directory are your repositories located in?', 'TOP_LVL_DIR')
+    sync_arg('What is the name of your organization in git?', 'ORG_NAME')
     set_host
     FileUtils.mkdir_p @conf_dir
     File.open(@conf_path, 'w') { |f| f.write @config.to_yaml } # Store
@@ -24,10 +25,16 @@ class BlissRunner
 
   # A function that automates the above three functions for a scheduled job
   def automate
-    if configured?
-      @docker_runner.run
-    else
-      puts 'Collector has not been configured. Cannot run auto-task.'.red
+    abort 'Collector has not been configured. Cannot run auto-task.' unless configured?
+    @docker_runner.run
+  end
+
+  # Start forked process
+  def start
+    abort 'Collector has not been configured. Cannot loop.' unless configured?
+    daemonize do
+      @docker_runner.run(STATUSFILE)
+      sleep 2
     end
   end
 
@@ -36,7 +43,7 @@ class BlissRunner
   def update_repositories
     puts 'Updating repositories to latest commit...'
     repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
-            .select { |fn| File.directory?(fn) && git_dir?(fn) }
+               .select { |fn| File.directory?(fn) && git_dir?(fn) }
     repos.each do |dir|
       cmd = "cd #{dir} && git pull"
       puts "\tPulling repository at #{dir}...".blue

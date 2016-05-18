@@ -7,15 +7,23 @@ This tool supports the following languages at the moment:
 * Python
 * Javascript
 * CSS
+* Sass
+* Stylus
 * Perl
 * PHP
 * Java
+* Scala
 * Objective-C
+* Swift
 * C++
+* C-Sharp/.Net
+* Elixir
 
 You can login to your Bliss Dashboard at the link below:
 
 <a href="https://app.blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
+
+The project analysis is platform independent. For example .NET project can be analyzed on a Unix machine.
 
 Information Required
 --------
@@ -33,7 +41,7 @@ Our CLI tool uses Docker to run our analysis in a controlled environment and Git
 The following is a list of required dependencies:
 *  Git
 *  Docker
-*  Ruby 2.x (for OSX or Windows installations)
+*  Ruby 2.2.x (for OSX or Windows installations)
 *  Homebrew (for OSX installations)
 
 You can download and install Homebrew from:
@@ -108,7 +116,8 @@ sudo yum install bliss
 #### Windows ####
 Windows users can simply download our executable file, at:
 https://s3.amazonaws.com/bliss-cli-win/bliss.exe
-You will still need to ensure that the Git and Docker dependencies are met.
+You will still need to ensure that the Git and Docker dependencies are met and that the executable is accessible in your PATH.
+You can find instructions on setting your PATH <a href="http://www.computerhope.com/issues/ch000549.htm" target="_blank">here</a>.
 
 #### Manual ####
 You can also simply clone this repository and run the CLI from the git directory.
@@ -134,7 +143,7 @@ bliss
 ``````
 
 #### Windows ####
-Windows users can just run the aforementioned executable, by navigating to the directory in powershell and typing:
+Windows users can run the aforementioned executable, by navigating to the directory in powershell and typing:
 ``````
 .\bliss.exe
 ``````
@@ -167,7 +176,7 @@ Configuration
 ------------
 
 The first time the CLI is run, you will be prompted for the information set out in the ['Information Required'](#information-required) section above.
-This information will be stored in a YAML file, $USER/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
+This information will be stored in a YAML file, $HOME/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
 
 <!-- The commands available through the CLI tool are:
 *  Collector (C) - this command will collect metadata about your repositories and post them to Bliss
