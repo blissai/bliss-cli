@@ -1,5 +1,5 @@
 module Cmd
-  def help
+  def help(arg)
     if arg.eql?('help') || arg.eql?('--help')
       puts 'Usage:'
       puts "bliss\t\t\t Run the CLI."
@@ -9,8 +9,8 @@ module Cmd
     end
   end
 
-  def version(arg, override = false)
-    if arg.eql?('version') || arg.eql?('-v') || arg.eql?('--version') || override
+  def version(arg)
+    if arg.eql?('version') || arg.eql?('-v') || arg.eql?('--version')
       puts $VERSION
       exit
     end
