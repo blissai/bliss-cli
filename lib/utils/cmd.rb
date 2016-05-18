@@ -1,6 +1,6 @@
 module Cmd
-  def help(arg)
-    if arg.eql?('help') || arg.eql?('--help')
+  def help(arg, override = false)
+    if arg.eql?('help') || arg.eql?('--help') || override
       puts 'Usage:'
       puts "bliss run \t\t Run the CLI."
       puts "bliss init \t\t Send preliminary repository data to Bliss."
