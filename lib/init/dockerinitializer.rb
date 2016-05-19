@@ -9,7 +9,7 @@ class DockerInitializer < DockerRunner
     pull_image if pull_latest
   end
 
-  def docker_start_cmd
+  def docker_start_cmd(_daemonfile = nil)
     docker_cmd = 'docker run'
     mount_cmd = " -v #{@git_dir}:/repository"
     @env_vars.each do |k, v|

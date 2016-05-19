@@ -6,7 +6,7 @@ class DockerLocal < DockerRunner
     # pull_image
   end
 
-  def docker_start_cmd
+  def docker_start_cmd(_daemonfile = nil)
     docker_cmd = 'docker run'
     mount_cmd = ''
     @files_to_mount.each do |k, v|

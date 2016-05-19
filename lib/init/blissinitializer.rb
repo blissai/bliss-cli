@@ -31,7 +31,6 @@ class BlissInitializer
   end
 
   def execute
-    # puts @docker_runner.docker_start_cmd
     @docker_runner.run
   end
 
