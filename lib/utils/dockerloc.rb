@@ -5,7 +5,7 @@ class DockerLoc < DockerRunner
     @directory = format_path(directory)
   end
 
-  def docker_start_cmd
+  def docker_start_cmd(_daemonfile = nil)
     bash_cmd = "find /repository -type f \\( #{supported_files} \\) -exec cat -- {} + | wc -l"
     "docker run --rm -v #{@directory}:/repository -t blissai/collector:latest #{bash_cmd}"
   end
