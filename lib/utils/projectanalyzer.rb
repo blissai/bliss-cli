@@ -53,7 +53,7 @@ class ProjectAnalyzer
     end
     subdir = $stdin.gets.chomp
     subdir = subdir.strip
-    exit if subdir == 'exit'
+    exit if subdir =~ /exit/
     File.join(maindir, subdir)
   end
 end
