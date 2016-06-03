@@ -34,6 +34,6 @@ elsif @args[0] == 'stop'
   br = BlissRunner.new(false)
   br.stop
 elsif @args[0] == 'status'
-  BlissRunner.new(false)
+  br = BlissRunner.new(false)
   puts br.status
 end
