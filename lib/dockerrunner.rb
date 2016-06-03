@@ -25,7 +25,7 @@ class DockerRunner
       docker_cmd += " -e \"#{k}=#{v}\""
     end
     collector_cmds = 'ruby /root/collector/blisscollector.rb'
-    rm = daemonile.nil? ? ' --rm ' : ' '
+    rm = daemonfile.nil? ? ' --rm ' : ' '
     "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}"
   end
 
