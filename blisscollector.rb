@@ -23,16 +23,17 @@ if @args[0] == 'stats' || @args[0] == 'lint'
   LocalRunner.new(@args, "bliss-#{task}").execute
 elsif @args[0] == 'init'
   BlissInitializer.new.execute
-else
+elsif @args[0] == 'run'
+  puts 'Running Bliss CLI...'
   br = BlissRunner.new
-  if @args[0] == 'run'
-    puts 'Running Bliss CLI...'
-    br.automate
-  elsif @args[0] == 'start'
-    br.start
-  elsif @args[0] == 'stop'
-    br.stop
-  elsif @args[0] == 'status'
-    puts br.status
-  end
+  br.automate
+elsif @args[0] == 'start'
+  br = BlissRunner.new
+  br.start
+elsif @args[0] == 'stop'
+  br = BlissRunner.new(false)
+  br.stop
+elsif @args[0] == 'status'
+  BlissRunner.new(false)
+  puts br.status
 end

@@ -3,12 +3,12 @@ class BlissRunner
   include Configuration
   include Gitbase
   include Daemon
-  def initialize
+  def initialize(run = true)
     # Load configuration File if it exists
     load_configuration
     configure_bliss
-    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'])
-    update_repositories
+    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'], 'blissai/collector:latest', run)
+    update_repositories if run
   end
 
   # Initialize state from config file or user input

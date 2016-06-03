@@ -15,7 +15,7 @@ class DockerRunner
     system command
     puts 'Docker finished.'
     # Removed stopped containers unless rm flag is set in docker command
-    remove_stopped unless command.include?(' --rm ')
+    remove_stopped unless command.include?(' --rm ') || daemonfile
   end
 
   def docker_start_cmd(daemonfile = nil)
@@ -25,7 +25,8 @@ class DockerRunner
       docker_cmd += " -e \"#{k}=#{v}\""
     end
     collector_cmds = 'ruby /root/collector/blisscollector.rb'
-    "#{docker_cmd} --rm -t #{@image_name} #{collector_cmds}"
+    rm = daemonile.nil? ? ' --rm ' : ' '
+    "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}"
   end
 
   def build_image
