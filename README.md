@@ -21,7 +21,7 @@ This tool supports the following languages at the moment:
 
 You can login to your Bliss Dashboard at the link below:
 
-<a href="https://app.blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
+<a href="https://blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
 
 The project analysis is platform independent. For example .NET project can be analyzed on a Unix machine.
 
@@ -169,7 +169,7 @@ The CLI will run three different tasks. These are:
 * Run various linting tools over each commit in order to track technical debt over time.
 
 #### Success/Failure ####
-If everything ran smoothly, you can visit your <a href="https://app.blissai.com/projects" target="_blank">Dashboard here</a>.
+If everything ran smoothly, you can visit your <a href="https://blissai.com/projects" target="_blank">Dashboard here</a>.
 
 If something went wrong, please email us at <a href="mailto:hello@bliss.ai">hello@bliss.ai</a> so we can provide you some assistance.
 Configuration

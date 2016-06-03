@@ -1,5 +1,5 @@
 # General purpose loader for require_relatived libraries
-$VERSION = '1.0.46'
+$VERSION = '1.0.47'
 require 'rubygems'
 require 'open3'
 require 'yaml'
