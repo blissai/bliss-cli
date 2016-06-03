@@ -17,6 +17,7 @@ module Daemon
 
   def read_pid
     pid = nil
+    FileUtils.touch(PIDFILE)
     File.open(PIDFILE, 'r') do |f|
       f.flock(File::LOCK_SH)
       pid = f.read
@@ -42,6 +43,7 @@ module Daemon
 
   def status
     status = nil
+    FileUtils.touch(STATUSFILE)
     File.open(STATUSFILE, 'r') do |f|
       f.flock(File::LOCK_SH)
       status = f.read

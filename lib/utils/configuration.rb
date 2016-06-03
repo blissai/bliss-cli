@@ -11,12 +11,8 @@ module Configuration
     end
   end
 
-  def set_host
-    @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
-  end
-
   def configured?
-    !@config['TOP_LVL_DIR'].empty? && !@config['ORG_NAME'].empty? && !@config['API_KEY'].empty? && !@config['BLISS_HOST'].empty?
+    !@config['TOP_LVL_DIR'].empty? && !@config['ORG_NAME'].empty? && !@config['API_KEY'].empty?
   end
 
   def format_arg(env, arg)

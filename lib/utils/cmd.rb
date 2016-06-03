@@ -1,6 +1,6 @@
 module Cmd
   def help(arg)
-    if arg.eql?('help') || arg.eql?('--help') || !valid(arg)
+    unless valid(arg)
       puts 'Usage:'
       puts "bliss run \t\t Run the CLI."
       puts "bliss init \t\t Send preliminary repository data to Bliss."
@@ -10,13 +10,13 @@ module Cmd
   end
 
   def version(arg)
-    if arg.eql?('version') || arg.eql?('-v') || arg.eql?('--version')
+    if %w(-v --version version).include?(arg)
       puts $VERSION
       exit
     end
   end
 
   def valid(arg)
-    %w(run init start stop status -v --version --help help stats lint).include?(arg)
+    %w(run init start stop status -v --version version stats lint).include?(arg)
   end
 end

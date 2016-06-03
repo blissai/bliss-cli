@@ -24,7 +24,6 @@ class BlissInitializer
     puts 'Configuring collector...'
     sync_arg('What\'s your Bliss API Key?', 'API_KEY')
     sync_arg('What is the name of your organization in git?', 'ORG_NAME')
-    set_host
     FileUtils.mkdir_p @conf_dir
     File.open(@conf_path, 'w') { |f| f.write @config.to_yaml } # Store
     puts 'Collector configured.'.green

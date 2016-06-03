@@ -21,7 +21,7 @@ This tool supports the following languages at the moment:
 
 You can login to your Bliss Dashboard at the link below:
 
-<a href="https://app.blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
+<a href="https://blissai.com/users/sign_in" target="_blank">Log in to Bliss</a>
 
 The project analysis is platform independent. For example .NET project can be analyzed on a Unix machine.
 
@@ -97,7 +97,7 @@ brew install bliss
 Ubuntu users can install the Bliss CLI using Apt:
 ``````
 wget -qO - https://deb.packager.io/key | sudo apt-key add -
-echo "deb https://deb.packager.io/gh/founderbliss/bliss-cli trusty master" | sudo tee /etc/apt/sources.list.d/bliss-cli.list
+echo "deb https://deb.packager.io/gh/founderbliss/bliss-cli trusty production" | sudo tee /etc/apt/sources.list.d/bliss-cli.list
 sudo apt-get update
 sudo apt-get install bliss
 ``````
@@ -108,7 +108,7 @@ RPM-based Linux users can install Bliss CLI using yum:
 sudo rpm --import https://rpm.packager.io/key
 echo "[bliss-cli]
 name=Repository for founderbliss/bliss-cli application.
-baseurl=https://rpm.packager.io/gh/founderbliss/bliss-cli/centos6/master
+baseurl=https://rpm.packager.io/gh/founderbliss/bliss-cli/centos6/production
 enabled=1" | sudo tee /etc/yum.repos.d/bliss-cli.repo
 sudo yum install bliss
 ``````
@@ -169,7 +169,7 @@ The CLI will run three different tasks. These are:
 * Run various linting tools over each commit in order to track technical debt over time.
 
 #### Success/Failure ####
-If everything ran smoothly, you can visit your <a href="https://app.blissai.com/projects" target="_blank">Dashboard here</a>.
+If everything ran smoothly, you can visit your <a href="https://blissai.com/projects" target="_blank">Dashboard here</a>.
 
 If something went wrong, please email us at <a href="mailto:hello@bliss.ai">hello@bliss.ai</a> so we can provide you some assistance.
 Configuration
