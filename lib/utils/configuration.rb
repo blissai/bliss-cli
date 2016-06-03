@@ -12,7 +12,7 @@ module Configuration
   end
 
   def set_host
-    @config['BLISS_HOST'] ||= 'https://app.founderbliss.com'
+    @config['BLISS_HOST'] ||= 'https://blissai.com'
   end
 
   def configured?
