@@ -3,7 +3,7 @@ module Daemon
   SHUTTING_DOWN = 'Shutting down...'.freeze
   RUNNING = 'Running...'.freeze
   STOPPED = 'Stopped.'.freeze
-  PIDFILE = File.expand_path('~/.bliss/pid').freeze
+  PIDFILE = File.expand_path('~/.bliss/bliss.pid').freeze
   STATUSFILE = File.expand_path('~/.bliss/pstatus').freeze
 
   def write_pid(pid)
@@ -38,6 +38,7 @@ module Daemon
   def stop
     abort 'Not running...' if status.include?(STOPPED)
     abort 'Already shutting down...' if status.include?(SHUTTING_DOWN)
+    puts 'Bliss daemon is shutting down. Please wait for linting to finish.'
     write_status(SHUTTING_DOWN)
   end
 
@@ -54,17 +55,15 @@ module Daemon
   def daemonize
     abort "Already running: pid #{read_pid}" if status.include?(RUNNING)
     puts 'Starting bliss daemon...'
-    pid = fork do
-      loop do
-        yield
-        next if status.eql?(RUNNING)
-        write_status(STOPPED)
-        write_pid('')
-        break
-      end
-    end
     write_status(RUNNING)
-    write_pid(pid)
-    puts "Bliss daemon started. (pid: #{pid})"
+    Process.daemon(true)
+    write_pid(Process.pid)
+    loop do
+      yield
+      next if status.eql?(RUNNING)
+      write_status(STOPPED)
+      write_pid('')
+      break
+    end
   end
 end
