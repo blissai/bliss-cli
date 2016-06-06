@@ -13,13 +13,17 @@ class DockerRunner
     command = docker_start_cmd(daemonfile)
     puts 'Running docker command...'
     system command
-    puts 'Docker finished.'
-    # Removed stopped containers unless rm flag is set in docker command
-    remove_stopped unless command.include?(' --rm ') || daemonfile
+    unless daemonfile
+      # Removed stopped containers unless rm flag is set in docker command
+      puts 'Docker finished.'
+      remove_stopped unless command.include?(' --rm ')
+    end
   end
 
   def docker_start_cmd(daemonfile = nil)
-    docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
+    base = 'docker run'
+    base += ' -i' unless daemonfile
+    docker_cmd = "#{base} -v #{@repos_dir}:/repositories"
     docker_cmd += " -v #{daemonfile}:/pstatus -e daemonized=true" if daemonfile
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
