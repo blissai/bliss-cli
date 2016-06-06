@@ -30,7 +30,8 @@ class DockerRunner
     end
     collector_cmds = 'ruby /root/collector/blisscollector.rb'
     rm = daemonfile.nil? ? ' --rm ' : ' '
-    "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}"
+    output = daemonfile.nil? ? '' : ' &> ~/.bliss/logs'
+    "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}#{output}"
   end
 
   def build_image
