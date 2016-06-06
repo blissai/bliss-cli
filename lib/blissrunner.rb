@@ -8,7 +8,6 @@ class BlissRunner
     load_configuration
     configure_bliss
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'], 'blissai/collector:latest', run)
-    update_repositories if run
   end
 
   # Initialize state from config file or user input
@@ -25,6 +24,7 @@ class BlissRunner
   # A function that automates the above three functions for a scheduled job
   def automate
     abort 'Collector has not been configured. Cannot run auto-task.' unless configured?
+    update_repositories if @run
     @docker_runner.run
   end
 
@@ -32,6 +32,7 @@ class BlissRunner
   def start
     abort 'Collector has not been configured. Cannot loop.' unless configured?
     daemonize do
+      update_repositories
       @docker_runner.run(STATUSFILE)
       sleep 2
     end
