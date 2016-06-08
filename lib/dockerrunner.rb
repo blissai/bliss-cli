@@ -19,12 +19,14 @@ class DockerRunner
   end
 
   def docker_start_cmd(daemonfile = nil)
-    docker_cmd = "docker run -i -v #{@repos_dir}:/repositories"
+    base = 'docker run'
+    base += ' -i' unless daemonfile
+    docker_cmd = "#{base} -v #{@repos_dir}:/repos"
     docker_cmd += " -v #{daemonfile}:/pstatus -e daemonized=true" if daemonfile
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
-    collector_cmds = 'ruby /root/collector/blisscollector.rb'
+    collector_cmds = 'cp -R /repos:/repositories; ruby /root/collector/blisscollector.rb'
     rm = daemonfile.nil? ? ' --rm ' : ' '
     "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}"
   end

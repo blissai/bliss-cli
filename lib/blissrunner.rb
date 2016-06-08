@@ -25,12 +25,15 @@ class BlissRunner
   # A function that automates the above three functions for a scheduled job
   def automate
     abort 'Collector has not been configured. Cannot run auto-task.' unless configured?
+    exit 'No repositories found.'.yellow if repos.empty?
+    update_repositories if @run
     @docker_runner.run
   end
 
   # Start forked process
   def start
     abort 'Collector has not been configured. Cannot loop.' unless configured?
+    exit 'No repositories found.'.yellow if repos.empty?
     daemonize do
       @docker_runner.run(STATUSFILE)
       sleep 2
@@ -39,12 +42,15 @@ class BlissRunner
 
   private
 
+  def repos
+    @repos ||= Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
+                  .select { |fn| File.directory?(fn) && git_dir?(fn) }
+  end
+
   def update_repositories
     puts 'Updating repositories to latest commit...'
-    repos = Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
-               .select { |fn| File.directory?(fn) && git_dir?(fn) }
     repos.each do |dir|
-      cmd = "cd #{dir} && git pull"
+      cmd = "cd #{dir} && git fetch --all && git reset --hard origin/master"
       puts "\tPulling repository at #{dir}...".blue
       checkout_commit(dir, 'master')
       `#{cmd}`
