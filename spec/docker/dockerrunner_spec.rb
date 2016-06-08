@@ -11,7 +11,7 @@ RSpec.describe DockerRunner do
 
   it 'should have the correct command' do
     expected = "docker run -i -v #{@testdir}:/repositories" \
-    ' -e "test_env=testenv" -e "test_env_two=testenvtwo" -e "TOP_LVL_DIR=/repositories"' \
+    ' -e "test_env=testenv" -e "test_env_two=testenvtwo" -e "TOP_LVL_DIR=/repos"' \
     ' --rm -t test/image ruby /root/collector/blisscollector.rb'
     expect(@docker_runner.docker_start_cmd).to eq(expected)
   end
