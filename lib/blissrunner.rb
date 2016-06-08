@@ -8,7 +8,6 @@ class BlissRunner
     load_configuration
     configure_bliss
     @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'], 'blissai/collector:latest', run)
-    update_repositories if run
   end
 
   # Initialize state from config file or user input
@@ -35,6 +34,7 @@ class BlissRunner
     abort 'Collector has not been configured. Cannot loop.' unless configured?
     exit 'No repositories found.'.yellow if repos.empty?
     daemonize do
+      update_repositories
       @docker_runner.run(STATUSFILE)
       sleep 2
     end

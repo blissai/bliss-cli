@@ -13,9 +13,11 @@ class DockerRunner
     command = docker_start_cmd(daemonfile)
     puts 'Running docker command...'
     system command
-    puts 'Docker finished.'
-    # Removed stopped containers unless rm flag is set in docker command
-    remove_stopped unless command.include?(' --rm ') || daemonfile
+    unless daemonfile
+      # Removed stopped containers unless rm flag is set in docker command
+      puts 'Docker finished.'
+      remove_stopped unless command.include?(' --rm ')
+    end
   end
 
   def docker_start_cmd(daemonfile = nil)
@@ -26,9 +28,10 @@ class DockerRunner
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
-    collector_cmds = 'cp -R /repos:/repositories; ruby /root/collector/blisscollector.rb'
+    collector_cmds = 'ruby /root/collector/blisscollector.rb'
     rm = daemonfile.nil? ? ' --rm ' : ' '
-    "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}"
+    output = daemonfile.nil? ? '' : ' &> ~/.bliss/logs'
+    "#{docker_cmd}#{rm}-t #{@image_name} #{collector_cmds}#{output}"
   end
 
   def build_image
