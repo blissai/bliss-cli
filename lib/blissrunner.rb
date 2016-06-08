@@ -32,7 +32,7 @@ class BlissRunner
   # Start forked process
   def start
     abort 'Collector has not been configured. Cannot loop.' unless configured?
-    exit 'No repositories found.'.yellow if repos.empty?
+    abort 'No repositories found.'.yellow if repos.empty?
     daemonize do
       update_repositories
       @docker_runner.run(STATUSFILE)
