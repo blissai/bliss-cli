@@ -7,7 +7,10 @@ class BlissRunner
     # Load configuration File if it exists
     load_configuration
     configure_bliss
-    @docker_runner = DockerRunner.new(@config, @config['TOP_LVL_DIR'], 'blissai/collector:latest', run)
+    @repos_dir = @config['TOP_LVL_DIR']
+    docker_params = @config.reject { |k, _v| k == 'TOP_LVL_DIR' }
+    @docker_runner = DockerRunner.new(docker_params, @repos_dir,
+                                      'blissai/collector:latest', run)
   end
 
   # Initialize state from config file or user input
@@ -24,7 +27,7 @@ class BlissRunner
   # A function that automates the above three functions for a scheduled job
   def automate
     abort 'Collector has not been configured. Cannot run auto-task.' unless configured?
-    exit 'No repositories found.'.yellow if repos.empty?
+    abort 'No repositories found.'.yellow if repos.empty?
     update_repositories if @run
     @docker_runner.run
   end
@@ -43,7 +46,7 @@ class BlissRunner
   private
 
   def repos
-    @repos ||= Dir.glob(File.expand_path("#{@config['TOP_LVL_DIR']}/*"))
+    @repos ||= Dir.glob(File.expand_path("#{@repos_dir}/*"))
                   .select { |fn| File.directory?(fn) && git_dir?(fn) }
   end
 
