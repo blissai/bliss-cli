@@ -24,7 +24,7 @@ class DockerRunner
     base += ' -i' unless daemonfile
     docker_cmd = "#{base} -v #{@repos_dir}:/repos"
     docker_cmd += " -v #{daemonfile}:/pstatus -e daemonized=true" if daemonfile
-    docker_cmd += ' -e \"TOP_LVL_DIR=/repositories"'
+    docker_cmd += ' -e "TOP_LVL_DIR=/repositories"'
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
