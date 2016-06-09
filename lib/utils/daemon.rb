@@ -60,7 +60,7 @@ module Daemon
     write_pid(Process.pid)
     loop do
       yield
-      next if status.eql?(RUNNING)
+      next if status.include?(RUNNING)
       write_status(STOPPED)
       write_pid('')
       break
