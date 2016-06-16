@@ -2,7 +2,6 @@
 class DockerRunner
   def initialize(env_vars, repos_dir, image_name = 'blissai/collector:latest', pull_latest = true)
     @env_vars = env_vars
-    @env_vars['TOP_LVL_DIR'] = '/repositories'
     @repos_dir = format_path(repos_dir)
     @image_name = image_name
     @daemonize = false
@@ -23,8 +22,9 @@ class DockerRunner
   def docker_start_cmd(daemonfile = nil)
     base = 'docker run'
     base += ' -i' unless daemonfile
-    docker_cmd = "#{base} -v #{@repos_dir}:/repositories"
+    docker_cmd = "#{base} -v #{@repos_dir}:/repos"
     docker_cmd += " -v #{daemonfile}:/pstatus -e daemonized=true" if daemonfile
+    docker_cmd += ' -e "TOP_LVL_DIR=/repositories"'
     @env_vars.each do |k, v|
       docker_cmd += " -e \"#{k}=#{v}\""
     end
