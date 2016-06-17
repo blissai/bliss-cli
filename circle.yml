@@ -9,8 +9,8 @@ dependencies:
     - "~/docker"
   override:
     - bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-test:
-  pre:
-    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker pull blissai/collector:latest
-    - mkdir -p ~/docker; docker save blissai/collector:latest > ~/docker/image.tar
+# test:
+#   pre:
+#     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+#     - docker pull blissai/collector:latest
+#     - mkdir -p ~/docker; docker save blissai/collector:latest > ~/docker/image.tar
