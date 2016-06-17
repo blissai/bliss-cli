@@ -126,9 +126,6 @@ Notes
 -----
 *  You will need to make sure that the machine the CLI runs on has the appropriate SSH keys setup, so that the application can 'git pull' without being prompted for a username/password combination.
 *  The CLI will track the currently checked out branch of a repository.
-<!-- *  The CLI will track the currently checked out branch of a repository. You can configure it to track a different branch on the Repository Settings page via your Bliss Dashboard. -->
-<!-- *  In order to keep your dashboard up to date, we recommend scheduling a recurring job to run this tool. [You can find out how to do this here.](docs/taskSched.md) -->
-<!-- *  The first time you run this tool, it will take some time to go over each commit of each repository. We suggest running the tool through once before setting up a scheduled job. -->
 *  Docker Machine uses a VirtualBox VM to host Docker. If you are using Docker Machine, you may wish to assign multiple processing cores to the VM in order to take advantage of the multi-threaded architecture of the Bliss CLI. This should provide an increase in the speed of your code analysis. [You can find out how to do this here.](docs/vboxConfig.md)
 
 Issues
