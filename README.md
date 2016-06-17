@@ -114,12 +114,13 @@ To run the Bliss CLI from a manual installation, navigate (cd) to the git direct
 ruby blisscollector.rb init
 `````
 
-#### What the tool does ####
+What the tool does
+--------
+
+This command will run our analysis over your most recent commit to give you an idea of how we break down technical debt in your repository. If everything ran smoothly, you can preview your project here <a href="https://blissai.com/projects" target="_blank">Dashboard here</a>
 
 NOTE: The first time the CLI is run, you will be prompted for the information set out in the ['Information Required'](#information-required) section above.
 This information will be stored in a YAML file, $HOME/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
-
-This command will run our analysis over your most recent commit to give you an idea of how we break down technical debt in your repository. If everything ran smoothly, you can preview your project here <a href="https://blissai.com/projects" target="_blank">Dashboard here</a>
 
 Notes
 -----
