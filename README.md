@@ -4,21 +4,7 @@ The Bliss CLI is a Ruby command-line application to collect repository and commi
 [You can find out about our full historical analysis here.](docs/inDepth.md)
 
 This tool supports the following languages at the moment:
-* Ruby
-* Python
-* Javascript
-* CSS
-* Sass
-* Stylus
-* Perl
-* PHP
-* Java
-* Scala
-* Objective-C
-* Swift
-* C++
-* C-Sharp/.Net
-* Elixir
+Ruby, Python, Javascript, CSS, SASS, Stylus, Perl, PHP, Java, Scala, Objective-C, Swift, C++, C#/.Net, Elixir, TypeScript
 
 You can login to your Bliss Dashboard at the link below:
 
@@ -33,7 +19,7 @@ You will need the following information before using Bliss's Collector:
 *  The path of the directory where all of your repositories are located
 *  Your git organization name
 
-**NOTE: You will need roughly 2gb of free space in order to install the Bliss CLI Tool.**
+**NOTE: You will need roughly 3.5gb of free space in order to install the Bliss CLI Tool.**
 
 Dependencies
 --------
@@ -43,25 +29,6 @@ The following is a list of required dependencies:
 *  Git
 *  Docker
 *  Ruby 2.2.x (for OSX or Windows installations)
-*  Homebrew (for OSX installations)
-
-You can download and install Homebrew from:
-http://brew.sh/
-
-#### Git ####
-
-For Ubuntu/Debian machines, execute the following in terminal:
-`````````
-sudo apt-get -y install git
-`````````
-
-For RPM-based systems such as Yum, execute the following in terminal:
-`````````
-sudo yum -y install git
-`````````
-
-For other Operating Systems (Windows/OSX), you can download Git from:
-https://git-scm.com/download
 
 #### Docker - Windows or OSX ####
 We recommend installing Docker by installing Docker Toolbox, which is located at:
@@ -73,11 +40,6 @@ This package contains everything needed to run Docker on Windows or OSX.
 To install Docker on Linux Operating Systems, follow the official Docker documentation for your Linux flavor at:
 <a href="https://docs.docker.com/engine/installation" target="_blank">Docker</a>
 
-Make sure that you **add your user** to the Docker group and **reboot after doing this**:
-````````
-sudo usermod -aG docker <your_username>
-````````
-
 Installation
 ------------
 Please make sure you following the instructions above and have **Docker installed** correctly before installation.
@@ -87,9 +49,6 @@ You can install the Bliss CLI using Homebrew:
 ``````
 brew update
 brew doctor
-``````
-Fix any issues reported by doctor, then once brew is working perfectly:
-``````
 brew tap founderbliss/homebrew-bliss-cli
 brew install bliss
 ``````
@@ -155,19 +114,10 @@ To run the Bliss CLI from a manual installation, navigate (cd) to the git direct
 ruby blisscollector.rb init
 `````
 
-#### Initial Preview ####
-It is recommended that you run our preview step before using the complete tool. This will give you an idea of what kind of data Bliss collects, and will give you a preview dashboard.
-To do this, navigate to a repository and run:
-`````
-bliss init
-`````
-Configuration
-------------
-
-The first time the CLI is run, you will be prompted for the information set out in the ['Information Required'](#information-required) section above.
-This information will be stored in a YAML file, $HOME/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
-
 #### What the tool does ####
+
+NOTE: The first time the CLI is run, you will be prompted for the information set out in the ['Information Required'](#information-required) section above.
+This information will be stored in a YAML file, $HOME/.bliss/config.yml for future use. You can remove any of these entries to be prompted again, or you can updated the information stored in the config file.
 
 This command will run our analysis over your most recent commit to give you an idea of how we break down technical debt in your repository. If everything ran smoothly, you can preview your project here <a href="https://blissai.com/projects" target="_blank">Dashboard here</a>
 
